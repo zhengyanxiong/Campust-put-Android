@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.tome.module_shop_mall">
+<!--android:name属性——是用来设置所有activity属于哪个application的，默认是android.app.Application。-->
+    <application
+        android:name="com.example.tome.module.MyApp"
+        android:allowBackup="true"
+        android:label="商品模板"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.HomeActivity" />
+        <activity android:name=".activity.ArticleDetailActivity" />
+        <activity android:name=".activity.KnowledgeDetailActivity" />
+        <activity android:name=".activity.MvcTestActivity" />
+        <activity android:name=".activity.MvpTestActivity"></activity>
+
+    </application>
+
+</manifest>

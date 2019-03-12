@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.tome.module_common">
+<!--android:name属性——是用来设置所有activity属于哪个application的，默认是android.app.Application。-->
+    <application
+        android:name="com.example.tome.module.MyCommenApp"
+        android:allowBackup="true"
+        android:label="Android常用控件"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".activity.CommonMainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.TagFlowActivity"/>
+        <activity android:name=".activity.AlertViewDemoActivity"/>
+        <activity android:name=".activity.HoverItemActivity"/>
+        <activity android:name=".activity.DragBallActivity"/>
+        <activity android:name=".activity.RatingBarActivity"/>
+        <activity android:name=".activity.PopupWindowActivity"/>
+        <activity android:name=".activity.MyAccountActivity"/>
+        <activity android:name=".activity.VideoCompressActivity"/>
+        <activity android:name=".activity.PickerViewActivity"/>
+        <activity android:name=".activity.JsonDataActivity"/>
+        <activity android:name=".activity.PictureSelectorActivity"/>
+        <activity android:name=".activity.KProgressHudActivity">
+        </activity>
+        <activity android:name=".activity.TipDialogActivity">
+        </activity>
+        <activity android:name=".activity.EmptyLayoutActivity">
+        </activity>
+        <activity android:name=".activity.ZxingActivity">
+        </activity>
+        <activity android:name=".activity.zxing.SecondActivity"/>
+        <activity android:name=".activity.zxing.ThreeActivity"/>
+        <activity android:name=".activity.HeaderListActivity">
+        </activity>
+
+    </application>
+
+</manifest>

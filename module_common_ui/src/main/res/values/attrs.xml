@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+
+    <!-- tips -->
+    <attr name="qmui_tip_dialog_bg" format="reference"/>
+    <attr name="qmui_tip_dialog_min_width" format="dimension"/>
+    <attr name="qmui_tip_dialog_min_height" format="dimension"/>
+    <attr name="qmui_tip_dialog_padding_vertical" format="dimension"/>
+    <attr name="qmui_tip_dialog_padding_horizontal" format="dimension"/>
+    <attr name="qmui_tip_dialog_margin_horizontal" format="dimension"/>
+
+    <attr name="qmui_content_spacing_horizontal" format="dimension"/> <!-- margin 和 padding 等使用的内容通用水平间距 -->
+
+    <!--switch开关-->
+    <declare-styleable name="slideswitch">
+        <attr name="themeColor" format="color"/>
+        <attr name="isOpen" format="boolean"/>
+        <attr name="shape">
+            <enum name="rect" value="1"/>
+            <enum name="circle" value="2"/>
+        </attr>
+        <attr name="btnColor" format="color"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="PullScrollView">
+        <attr name="header" format="reference" />
+        <attr name="headerHeight" format="dimension" />
+        <attr name="headerVisibleHeight" format="dimension" />
+    </declare-styleable>
+</resources>

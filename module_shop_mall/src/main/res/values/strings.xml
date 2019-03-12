@@ -1,0 +1,53 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="mall_app_logo">AndroidFrame</string>
+    <string name="mall_shop_mall_app_name">module_shop_mall</string>
+    <string name="mall_home_page">首页</string>
+    <string name="mall_home_shop">商品</string>
+    <string name="mall_home_cart">购物车</string>
+    <string name="mall_home_find">发现</string>
+    <string name="mall_home_message">消息</string>
+    <string name="mall_home_self">我的</string>
+
+    <string name="mall_login_in">登陆</string>
+    <string name="mall_welfare">福利</string>
+    <string name="mall_video">视频</string>
+    <string name="mall_about_us">关于我们</string>
+    <string name="mall_logout">退出登录</string>
+
+    <string name="mall_drawer_open">Open drawer</string>
+    <string name="mall_drawer_close">Close drawer</string>
+
+    //主页
+    <string name="mall_item_article_author">作者：<xliff:g id="author">%s</xliff:g></string>
+    <string name="mall_item_article_classify">分类：<xliff:g id="classify">%s</xliff:g></string>
+    <string name="mall_item_article_time">时间：<xliff:g id="time">%s</xliff:g></string>
+
+    //文章页面
+    <string name="mall_web_tint">网页由 www.wanandroid.com 提供\n开源不易，欢迎各路大神Star</string>
+
+    <string name="mall_search_null_tint">快来搜点干货吧*≧▽≦*</string>
+    <string name="mall_history_search">搜索历史</string>
+    <string name="mall_clear_all">清空</string>
+    <string name="mall_hot_search">热搜</string>
+
+    <string name="exit">再按一次退出程序</string>
+
+    <string name="user_name">用户组件</string>
+    <string name="user_info">用户：</string>
+    <string name="user_app_name">TranslucentScrollView</string>
+    <string name="user_auther">作者:Bernie</string>
+    <string name="user_email">742228386@qq.com</string>
+
+    <string name="user_shopping_car">购物车</string>
+    <string name="user_consume_history">购买记录</string>
+    <string name="user_wallet">钱包</string>
+    <string name="user_sign">签到</string>
+    <string name="user_today_has_sign">(今日已签到)</string>
+    <string name="user_receive_address">收货地址</string>
+    <string name="user_my_agent">我的商户</string>
+    <string name="user_i_want_a_teacher">我要拜师</string>
+    <string name="user_start_luck">开始抽奖</string>
+    <string name="user_invite_reward">邀请奖励</string>
+    <string name="user_set">设置</string>
+</resources>
