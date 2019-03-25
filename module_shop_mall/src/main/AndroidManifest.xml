@@ -23,6 +23,7 @@
         <activity android:name=".activity.MvcTestActivity" />
         <activity android:name=".activity.MvpTestActivity"></activity>
         <activity android:name=".activity.MvpNoModelTestActivity"></activity>
+        <activity android:name=".activity.LoginActivity"/>
     </application>
 
 </manifest>

@@ -8,12 +8,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.tome.core.util.UltimateBar;
 import com.example.tome.module_shop_mall.R;
 import com.example.tome.module_shop_mall.R2;
 import com.example.tome.module_shop_mall.fagment.HomeFragment;
@@ -86,10 +90,18 @@ public class MainActivity extends BaseVcPermissionActivity implements   View.OnC
     }
 
     private void initBottomNavigationView() {
+
         //默认 >3 的选中效果会影响ViewPager的滑动切换时的效果，故利用反射去掉
         BottomNavigationViewHelper.disableShiftMode(mBottomNavigationView);
         // 预设定进来后,默认显示fragment
-        addFragment(R.id.layout_pager, mFragmentList.get(0));
+        int getMyCenter = getIntent().getIntExtra("toMyCenter",0);
+        if(getMyCenter == 4){
+            addFragment(R.id.layout_pager,mFragmentList.get(3));
+            mBottomNavigationView.setSelectedItemId(mBottomNavigationView.getMenu().getItem(3).getItemId());
+        } else {
+            addFragment(R.id.layout_pager, mFragmentList.get(0));
+        }
+
         mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -133,5 +145,8 @@ public class MainActivity extends BaseVcPermissionActivity implements   View.OnC
             transaction.commit();
         }
     }
+
+
+
 
 }

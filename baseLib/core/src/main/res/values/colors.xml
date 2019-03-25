@@ -3,7 +3,7 @@
     <color name="otherui_color_white">#FFFFFF</color>
     <!--点击颜色-->
     <color name="otherui_bgColor_alert_button_press">#EAEAEA</color>
-    <color name="otherui_color_cc000">#cc000000</color>
+    <color name="otherui_color_cc000">#cc252424</color>
     <!--覆盖颜色-->
     <color name="otherui_bgColor_overlay">#60000000</color>
     <!--alertdialog颜色-->

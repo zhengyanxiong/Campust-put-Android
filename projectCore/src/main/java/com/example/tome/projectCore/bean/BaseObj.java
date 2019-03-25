@@ -8,24 +8,24 @@ package com.example.tome.projectCore.bean;
 
 public class BaseObj<T> {
 
-    private String errorCode;
-    private String errorMsg;
+    private String code;
+    private String msg;
     private T data;
 
     public String getCode() {
-        return errorCode;
+        return code;
     }
 
     public void setCode(String code) {
-        this.errorCode = code;
+        this.code = code;
     }
 
     public String getMessage() {
-        return errorMsg;
+        return msg;
     }
 
     public void setMessage(String message) {
-        this.errorMsg = message;
+        this.msg = message;
     }
 
     public T getData() {
@@ -34,5 +34,14 @@ public class BaseObj<T> {
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return "BaseObj{" +
+                "code='" + code + '\'' +
+                ", msg='" + msg + '\'' +
+                ", data=" + data +
+                '}';
     }
 }

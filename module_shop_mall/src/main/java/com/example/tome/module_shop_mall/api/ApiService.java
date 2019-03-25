@@ -1,5 +1,7 @@
 package com.example.tome.module_shop_mall.api;
 
+import com.example.tome.module_shop_mall.bean.LoginBean;
+import com.example.tome.module_shop_mall.bean.UserInfor;
 import com.example.tome.projectCore.bean.BaseObj;
 import com.example.tome.module_shop_mall.bean.BannerData;
 import com.example.tome.module_shop_mall.bean.FeedArticleListData;
@@ -9,13 +11,20 @@ import com.example.tome.module_shop_mall.bean.NavigationBean;
 import com.example.tome.module_shop_mall.bean.ProjectClassifyBean;
 import com.example.tome.module_shop_mall.bean.ProjectListBean;
 import com.example.tome.module_shop_mall.bean.TopSearchBean;
+import com.example.tome.projectCore.widget.emptyViews.LoadingView;
+
 import io.reactivex.Observable;
 import java.util.List;
 import java.util.Map;
+
+import retrofit2.http.Body;
+import retrofit2.http.Field;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
+import retrofit2.http.Url;
 
 /**
  * @Created by TOME .
@@ -111,4 +120,22 @@ public interface ApiService {
      */
     @GET("project/list/{page}/json")
     Observable<BaseObj<ProjectListBean>> getProjectListData(@Path("page") int page, @Query("cid") int cid);
+
+    /**
+     * 用户登录
+     * 192.168.43.152:8762
+     * @param loginBean
+     * @return
+     */
+    @POST("member/login")
+    Observable<BaseObj<Map<String,String>>> login(@Body LoginBean loginBean);
+
+    /**
+     * 获得用户信息
+     * 192.168.43.152:8762
+     * @param token
+     * @return
+     */
+    @GET("/member/findByToken")
+    Observable<BaseObj<UserInfor>> getUserInfor(@Query("token") String token);
 }
