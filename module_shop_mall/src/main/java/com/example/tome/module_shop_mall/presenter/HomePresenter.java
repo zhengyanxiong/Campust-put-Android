@@ -53,7 +53,7 @@ public class HomePresenter extends BasePresenter<HomeContract.View, HomeContract
 
 
     //接收有参构造函数
-    public HomePresenter(String type) {
+    public HomePresenter() {
     }
 
     public HomePresenter(Context activity, RecyclerView recyclerView) {
@@ -77,47 +77,10 @@ public class HomePresenter extends BasePresenter<HomeContract.View, HomeContract
     }
 
 
-    @Override
-    public void startBannerPlay() {
-        if (mBanner != null) {
-            mBanner.startAutoPlay();
-        }
-    }
-
-    @Override
-    public void stopBannerPlay() {
-        if (mBanner != null) {
-            mBanner.stopAutoPlay();
-        }
-    }
-
-    @Override
-    public void BannerData() {
-        addDisposable(
-                mModel.getBannerData()
-                        //  .subscribeOn(Schedulers.io()) //指定网络请求在IO线程
-                        //  .retryWhen(new RetryWithDelay)////遇到错误时重试
-                        .doOnSubscribe(disposable -> {
-                            // mView.showHUD("");//显示进度条
-                        })
-                        .subscribeOn(AndroidSchedulers.mainThread())//显示进度条在主线程
-                        // .observeOn(AndroidSchedulers.mainThread())     //显示数据在主线程
-                        .doFinally(() -> {
-                            //  mView.dismissHUD();//隐藏进度条
-
-                        })
-                        // .compose(RxLifecycleUtils.bindToLifecycle(mRootView))//使用 Rxlifecycle,使 Disposable 和 Activity 一起销毁
-                        .subscribeWith(new BaseObserver<BaseObj<List<BannerData>>>() {
-                            @Override
-                            public void onNext(BaseObj<List<BannerData>> listBaseObj) {
-                                List<BannerData> data = listBaseObj.getData();
-                                // mView.showBannerData(data);
-                                initBannerData(data);
-                            }
-                        }));
 
 
-    }
+
+
 
     private void initBannerData(List<BannerData> bannerDataList) {
         if (bannerDataList == null || bannerDataList.size() == 0) {
@@ -162,41 +125,6 @@ public class HomePresenter extends BasePresenter<HomeContract.View, HomeContract
         // mBanner.update(mBannerImageList, mBannerTitleList);
         //banner设置方法全部调用完毕时最后调用
         mBanner.start();
-    }
-
-    @Override
-    public void FeedArticleList(boolean isRefresh, SmartRefreshLayout rlRefreshLayout, int page) {
-        mIsRefresh = isRefresh;
-        addDisposable(
-                mModel.getFeedArticleList(page)
-                        .subscribeOn(Schedulers.io()) //指定网络请求在IO线程
-                        //  .retryWhen(new RetryWithDelay)////遇到错误时重试
-                        .doOnSubscribe(disposable -> {
-                            if (mIsRefresh) {
-                                // mView.showLoading();//显示下拉刷新的进度条
-                                // mView
-                            } else {
-                                // mView.startLoadMore();//显示上拉加载更多的进度条
-                            }
-                        }).subscribeOn(AndroidSchedulers.mainThread())//显示进度条在主线程
-                        .observeOn(AndroidSchedulers.mainThread())     //显示数据在主线程
-                        .doFinally(() -> {
-                            if (mIsRefresh) {
-                                // mView.hideLoading();//隐藏下拉刷新的进度条
-                            } else {
-                                // mView.endLoadMore();//隐藏上拉加载更多的进度条
-                            }
-                        })
-                        // .compose(RxLifecycleUtils.bindToLifecycle(mRootView))//使用 Rxlifecycle,使 Disposable 和 Activity 一起销毁
-                        .subscribeWith(new BaseObserver<BaseObj<FeedArticleListData>>(mView,rlRefreshLayout) {
-                            @Override
-                            public void onNext(BaseObj<FeedArticleListData> listBaseObj) {
-                                FeedArticleListData data = listBaseObj.getData();
-                                showArticleList(data);
-
-                            }
-                        }));
-
     }
 
     private void showArticleList(FeedArticleListData feedArticleListData) {

@@ -1,6 +1,7 @@
 package com.example.tome.module_shop_mall.activity;
 
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -37,7 +38,7 @@ import butterknife.BindView;
 
 
 @Route(path = RouterURLS.BASE_MAIN)
-public class MainActivity extends BaseVcPermissionActivity implements   View.OnClickListener {
+public class MainActivity extends BaseVcPermissionActivity implements View.OnClickListener {
 
     @BindView(R2.id.layout_pager)
     FrameLayout mFrameLayout;
@@ -74,7 +75,7 @@ public class MainActivity extends BaseVcPermissionActivity implements   View.OnC
     @Override
     protected void initView() {
         //注册EventBus
-        super.regEvent = true ;
+        super.regEvent = true;
         initFragment();
         initBottomNavigationView();
     }
@@ -93,10 +94,11 @@ public class MainActivity extends BaseVcPermissionActivity implements   View.OnC
 
         //默认 >3 的选中效果会影响ViewPager的滑动切换时的效果，故利用反射去掉
         BottomNavigationViewHelper.disableShiftMode(mBottomNavigationView);
+
         // 预设定进来后,默认显示fragment
-        int getMyCenter = getIntent().getIntExtra("toMyCenter",0);
-        if(getMyCenter == 4){
-            addFragment(R.id.layout_pager,mFragmentList.get(3));
+        int getMyCenter = getIntent().getIntExtra("toMyCenter", 0);
+        if (getMyCenter == 4) {
+            addFragment(R.id.layout_pager, mFragmentList.get(3));
             mBottomNavigationView.setSelectedItemId(mBottomNavigationView.getMenu().getItem(3).getItemId());
         } else {
             addFragment(R.id.layout_pager, mFragmentList.get(0));
@@ -122,6 +124,7 @@ public class MainActivity extends BaseVcPermissionActivity implements   View.OnC
 
     /**
      * 显示fragment
+     *
      * @param frameLayoutId
      * @param fragment
      */
@@ -145,8 +148,6 @@ public class MainActivity extends BaseVcPermissionActivity implements   View.OnC
             transaction.commit();
         }
     }
-
-
 
 
 }

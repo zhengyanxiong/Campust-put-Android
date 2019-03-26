@@ -37,7 +37,7 @@ public interface HomeContract {
         /**
          * 加载轮播图
          */
-        void  BannerData();
+        //void  BannerData();
 
         /**
          * 获取文章数据
@@ -45,17 +45,17 @@ public interface HomeContract {
          * @param rlRefreshLayout
          * @param page
          */
-        void  FeedArticleList(boolean isRefresh, SmartRefreshLayout rlRefreshLayout, int page);
+        //void  FeedArticleList(boolean isRefresh, SmartRefreshLayout rlRefreshLayout, int page);
 
         /**
          * 轮播图自动播放
          */
-        void startBannerPlay();
+        //void startBannerPlay();
 
         /**
          * 轮播图停止播放
          */
-        void stopBannerPlay();
+        //void stopBannerPlay();
     }
 
     interface Model extends IModel{
@@ -63,12 +63,12 @@ public interface HomeContract {
          * 获取条目数据
          * @param page
          */
-        Observable<BaseObj<FeedArticleListData>> getFeedArticleList(int page);
+        //Observable<BaseObj<FeedArticleListData>> getFeedArticleList(int page);
 
         /**
          * 获取轮播图数据
          */
-        Observable<BaseObj<List<BannerData>>> getBannerData();
+        //Observable<BaseObj<List<BannerData>>> getBannerData();
     }
 
 

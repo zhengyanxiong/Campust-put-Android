@@ -68,8 +68,7 @@ public class MyCenterFragment extends BaseVpFragment<MyCenterContract.View, MyCe
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("");
         setHasOptionsMenu(true);
 
-        /*mImmersionBar.fitsSystemWindows(true).statusBarColor("#8cd728")
-                .statusBarDarkFont(true, 0.1f).init();*/
+        mImmersionBar.fitsSystemWindows(true).statusBarColor("#F49423").init();
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

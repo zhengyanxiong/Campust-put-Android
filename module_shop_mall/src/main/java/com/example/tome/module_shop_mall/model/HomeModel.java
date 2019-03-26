@@ -24,16 +24,6 @@ public class HomeModel extends DisposablePool implements HomeContract.Model{
         mPresenter = presenter;
     }
 
-    @Override
-    public Observable<BaseObj<FeedArticleListData>> getFeedArticleList(int page) {
-     return  ModelVpService.getRemoteDataVp(new ModelVpService.MethodSelect<FeedArticleListData>() {
-            @Override
-            public Observable<BaseObj<FeedArticleListData>> selectM(ApiService service) {
-                return service.getFeedArticleList(page);
-            }
-        });
-    }
-
   //  @Override
 //    public void getBannerData1() {
 //        addDisposable(ModelVpService.getRemoteDataVp(new ModelVpService.MethodSelect<List<BannerData>>() {
@@ -61,7 +51,7 @@ public class HomeModel extends DisposablePool implements HomeContract.Model{
 
 //    }
 
-    @Override
+   /* @Override
     public Observable<BaseObj<List<BannerData>>> getBannerData() {
 
         Observable<BaseObj<List<BannerData>>> remoteDataVp = ModelVpService.getRemoteDataVp(new ModelVpService.MethodSelect<List<BannerData>>() {
@@ -69,7 +59,7 @@ public class HomeModel extends DisposablePool implements HomeContract.Model{
             public Observable<BaseObj<List<BannerData>>> selectM(ApiService service) {
                 return service.getBannerData();
             }
-        });
+        });*/
 
      /*   BaseVpObserver<BaseObj<List<BannerData>>> remoteDataV = ModelVpService.getRemoteDataV(new ModelVcService.MethodSelect<List<BannerData>>() {
             @Override
@@ -85,8 +75,8 @@ public class HomeModel extends DisposablePool implements HomeContract.Model{
 
        // addDisposable(remoteDataV);
 
-        return remoteDataVp;
-    }
+     /*   return remoteDataVp;
+    }*/
 
 //    /**
 //     * 获取文章数据

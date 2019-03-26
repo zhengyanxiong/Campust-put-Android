@@ -17,6 +17,13 @@
         app:showAsAction="ifRoom" />
 
     <item
+        android:id="@+id/tab_add"
+        android:enabled="true"
+        android:icon="@mipmap/ic_tab_add"
+        android:title="@string/mall_home_add"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/tab_message"
         android:enabled="true"
         android:icon="@drawable/mall_home_tab_navigation"
