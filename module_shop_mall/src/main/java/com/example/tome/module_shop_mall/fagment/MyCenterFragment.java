@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.tome.core.base.mvp.BaseVpFragment;
 import com.example.tome.core.base.mvp.inter.IPresenter;
 import com.example.tome.core.base.mvp.inter.IView;
@@ -25,19 +26,23 @@ import com.example.tome.core.util.UltimateBar;
 import com.example.tome.module_shop_mall.R;
 import com.example.tome.module_shop_mall.R2;
 import com.example.tome.module_shop_mall.activity.LoginActivity;
+import com.example.tome.module_shop_mall.arouter.RouterCenter;
 import com.example.tome.module_shop_mall.bean.ProjectClassifyBean;
 import com.example.tome.module_shop_mall.bean.UserInfor;
 import com.example.tome.module_shop_mall.contract.IProjectContract;
 import com.example.tome.module_shop_mall.contract.MyCenterContract;
 import com.example.tome.module_shop_mall.presenter.MyCenterPresenter;
+import com.fec.core.router.arouter.RouterURLS;
 
 import java.util.List;
 
 import butterknife.BindView;
+import retrofit2.http.Path;
 
 /**
  * Author: created by Bernie on 2019/3/12
  **/
+@Route(path = RouterURLS.MALL_MYCENTER)
 public class MyCenterFragment extends BaseVpFragment<MyCenterContract.View, MyCenterContract.Presenter> implements MyCenterContract.View{
 
     /*@BindView(R2.id.title_my_center_text)
@@ -93,6 +98,7 @@ public class MyCenterFragment extends BaseVpFragment<MyCenterContract.View, MyCe
 
     @Override
     protected void initView() {
+        StatuBarCompat.setTranslucentStatus(getActivity());
         //判断用户是否登录
         String memberToken = (String)SPUtil.get((AppCompatActivity)getActivity(),Constants.MEMBER_TOCKEN,"");
         RelativeLayout.LayoutParams rl_user =(RelativeLayout.LayoutParams) userImg.getLayoutParams();
@@ -124,7 +130,7 @@ public class MyCenterFragment extends BaseVpFragment<MyCenterContract.View, MyCe
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (R.id.action_settings == item.getItemId()) {
-            ToastUtils.showCenter("你点了设置按钮。。。");
+            RouterCenter.toMyCenterSetting();
         }
         return true;
     }

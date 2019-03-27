@@ -73,4 +73,18 @@ public class RouterCenter {
         ARouter.getInstance().build(RouterURLS.CUSTOM_CONTROL).navigation();
     }
 
+    /**
+     * 跳转到个人中心Activity
+     */
+    public static void toMyCenter(){
+        ARouter.getInstance().build(RouterURLS.MALL_MYCENTER).navigation();
+    }
+
+    /**
+     * 跳转到个人中心设置Activity
+     */
+    public static void toMyCenterSetting(){
+        ARouter.getInstance().build(RouterURLS.MYCENTER_SETTING).navigation();
+    }
+
 }

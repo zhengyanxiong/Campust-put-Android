@@ -14,6 +14,7 @@ import com.example.tome.core.base.mvc.BaseVcActivity;
 import com.example.tome.core.base.mvp.BaseVpActivity;
 import com.example.tome.core.constants.Constants;
 import com.example.tome.core.util.SPUtil;
+import com.example.tome.core.util.StatuBarCompat;
 import com.example.tome.core.util.StringUtils;
 import com.example.tome.core.util.ToastUtils;
 import com.example.tome.module_shop_cart.utils.BasicTool;
@@ -72,6 +73,8 @@ public class LoginActivity extends BaseVpActivity<ILoginsContract.View,ILoginsCo
     @Override
     public void initView() {
 
+        setImmeriveStatuBar();
+        //StatuBarCompat.setTranslucentStatus(this);
         //登录
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override

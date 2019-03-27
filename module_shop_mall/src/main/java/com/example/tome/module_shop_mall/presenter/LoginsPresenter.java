@@ -59,9 +59,10 @@ public class LoginsPresenter extends BasePresenter<ILoginsContract.View,ILoginsC
         }, new INetCallback<LoginBean>() {
             @Override
             public void onSuccess(LoginBean result) {
-                L.d("登录-------",result);
+                L.d("登录-------", result);
             }
         }));*/
+
         addDisposable(mModel.login(loginBean)
             .subscribeWith(new BaseObserver<BaseObj<Map<String,String>>>(mView){
                 @Override

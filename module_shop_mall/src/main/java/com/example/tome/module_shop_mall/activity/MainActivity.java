@@ -2,6 +2,7 @@ package com.example.tome.module_shop_mall.activity;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -18,6 +19,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.tome.core.util.StatuBarCompat;
 import com.example.tome.core.util.UltimateBar;
 import com.example.tome.module_shop_mall.R;
 import com.example.tome.module_shop_mall.R2;
@@ -69,11 +71,14 @@ public class MainActivity extends BaseVcPermissionActivity implements View.OnCli
 
     @Override
     protected void initTitle() {
+        StatuBarCompat.setImmersiveStatusBar(true, Color.WHITE, this);
 
     }
 
     @Override
     protected void initView() {
+        StatuBarCompat.setImmersiveStatusBar(true, Color.WHITE, this);
+
         //注册EventBus
         super.regEvent = true;
         initFragment();

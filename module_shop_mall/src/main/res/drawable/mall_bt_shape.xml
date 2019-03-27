@@ -5,7 +5,7 @@
 <!--
     //shape用于定义形状，有四种形状(矩形rectangle| 椭圆oval | 直线line | 圆形ring)
 -->
-    <solid android:color="@color/white" />
+    <solid android:color="@color/orange_fba" />
 <!--
     //solid用于设置填充形状的颜色
 -->

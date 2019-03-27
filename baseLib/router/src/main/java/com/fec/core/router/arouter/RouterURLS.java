@@ -26,5 +26,7 @@ public interface RouterURLS {
 
     String CUSTOM_CONTROL = "/custom/control";
 
+    String MALL_MYCENTER = "/mall/mycenter";
+    String MYCENTER_SETTING = "/mycenter/setting";
 
 }

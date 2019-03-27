@@ -16,6 +16,7 @@ import butterknife.BindView;
 
 import com.example.tome.core.base.mvp.BaseVpFragment;
 import com.example.tome.core.constants.Constants;
+import com.example.tome.core.util.StatuBarCompat;
 import com.example.tome.core.util.widgetUtils.WebViewInitUtils;
 import com.example.tome.module_shop_mall.activity.MainActivity;
 import com.example.tome.projectCore.base.mvp.BaseVpListFragment;
@@ -50,6 +51,7 @@ public class HomeFragment extends BaseVpFragment<HomeContract.View, HomeContract
 
     @Override
     protected void initView() {
+        StatuBarCompat.setImmersiveStatusBarWithView(true,getActivity());
         mImmersionBar.transparentBar().init();
         WebViewInitUtils.init(getActivity(),webView);
         webView.loadUrl(Constants.HOME_PAGE_LINK);
