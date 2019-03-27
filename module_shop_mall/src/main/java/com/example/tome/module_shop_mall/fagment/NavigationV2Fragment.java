@@ -8,6 +8,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import butterknife.BindView;
+
+import com.example.tome.core.base.mvp.inter.IPresenter;
+import com.example.tome.core.base.mvp.inter.IView;
+import com.example.tome.projectCore.base.mvc.BaseEmptyVcFragment;
 import com.example.tome.projectCore.base.mvp.BaseEmptyVpFragment;
 import com.example.tome.module_shop_mall.R;
 import com.example.tome.module_shop_mall.R2;
@@ -29,9 +33,46 @@ import q.rorbin.verticaltablayout.widget.TabView;
  * - generate by MvpAutoCodePlus plugin.
  */
 
-public class NavigationV2Fragment extends BaseEmptyVpFragment<INavigationV2Contract.View,INavigationV2Contract.Presenter> implements INavigationV2Contract.View {
+public class NavigationV2Fragment extends BaseEmptyVcFragment/*<INavigationV2Contract.View,INavigationV2Contract.Presenter> implements INavigationV2Contract.View */{
+    @BindView(R2.id.title_content_text)
+    TextView mTitleContentText;
+    @BindView(R2.id.normal_view)
+    LinearLayout mNormalView;
 
-    @BindView(R2.id.navigation_tab_layout)
+    @Override
+    public ViewGroup getViewGroup(View view) {
+        return (ViewGroup) view.findViewById(R.id.normal_view);
+    }
+
+    @Override
+    protected int getLayout() {
+        return R.layout.mall_fragment_navigation_v2;
+    }
+
+    @Override
+    protected void initTitle() {
+        mTitleContentText.setText("消息");
+    }
+
+    @Override
+    protected void initView() {
+        /*showEmptyView();
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                try {
+                    Thread.sleep(3000);//休眠3秒
+                    mEmptyView.hide();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();*/
+
+    }
+
+    /*@BindView(R2.id.navigation_tab_layout)
     VerticalTabLayout mTabLayout;
     @BindView(R2.id.navigation_RecyclerView)
     RecyclerView mRecyclerView;
@@ -67,7 +108,7 @@ public class NavigationV2Fragment extends BaseEmptyVpFragment<INavigationV2Contr
 
     @Override
     protected void initTitle() {
-        mTitleText.setText("导航");
+        mTitleText.setText("消息");
     }
 
     @Override
@@ -121,9 +162,9 @@ public class NavigationV2Fragment extends BaseEmptyVpFragment<INavigationV2Contr
         mRecyclerView.setAdapter(adapter);
     }
 
-    /**
+    *//**
      * 设置左边和右边的联动
-     */
+     *//*
     private void leftRightLinkage() {
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -166,9 +207,9 @@ public class NavigationV2Fragment extends BaseEmptyVpFragment<INavigationV2Contr
         smoothScrollToPosition(i);
     }
 
-    /**
+    *//**
      * recyclerView 的滚动
-     */
+     *//*
     private void scrollRecyclerView() {
         needScroll = false;
         int indexDistance = index - mManager.findFirstVisibleItemPosition();
@@ -178,10 +219,10 @@ public class NavigationV2Fragment extends BaseEmptyVpFragment<INavigationV2Contr
         }
     }
 
-    /**
+    *//**
      * 右边联动左边
      * @param newState
-     */
+     *//*
     private void rightLinkageLeft(int newState) {
         //recyclerview 的newState有三种值,SCROLL_STATE_IDLE, SCROLL_STATE_DRAGGING ,SCROLL_STATE_SETTLING
         //正在滚动
@@ -198,10 +239,10 @@ public class NavigationV2Fragment extends BaseEmptyVpFragment<INavigationV2Contr
         }
     }
 
-    /**
+    *//**
      * 右边选择左边的位置
      * @param position
-     */
+     *//*
     private void setChecked(int position) {
         if (isClickTab) {
             isClickTab = false;
@@ -228,7 +269,7 @@ public class NavigationV2Fragment extends BaseEmptyVpFragment<INavigationV2Contr
             needScroll = true;
         }
     }
-
+*/
 
 }
 

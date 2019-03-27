@@ -8,8 +8,21 @@
     tools:context="com.example.tome.module_shop_mall.fagment.KnowledgeSystemFragment">
 
     <include layout="@layout/title_bar_content" />
-
     <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:text="待开发中"/>
+    </ScrollView>
+
+    <!--<ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -25,7 +38,7 @@
             android:layout_height="wrap_content"
             android:background="@color/mall_color99"
             android:orientation="vertical">
-            <!--标题-->
+            &lt;!&ndash;标题&ndash;&gt;
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -55,7 +68,7 @@
                 android:orientation="horizontal">
 
 
-                <!-- 圆形图-->
+                &lt;!&ndash; 圆形图&ndash;&gt;
                 <com.example.tome.core.widget.CircularImageView
                     android:id="@+id/civ_welfare_one"
                     android:layout_width="0dp"
@@ -64,7 +77,7 @@
                     android:layout_margin="10dp"
                     />
 
-                <!--  圆形图-->
+                &lt;!&ndash;  圆形图&ndash;&gt;
                 <com.example.tome.core.widget.CircularImageView
                     android:id="@+id/civ_welfare_two"
                     android:layout_width="0dp"
@@ -84,7 +97,7 @@
         </LinearLayout>
 
         </LinearLayout>
-    </ScrollView>
+    </ScrollView>-->
 
 
 </LinearLayout>

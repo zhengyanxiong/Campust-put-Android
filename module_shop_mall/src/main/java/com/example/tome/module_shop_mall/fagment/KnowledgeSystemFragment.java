@@ -35,7 +35,48 @@ import io.reactivex.Observable;
 import java.util.List;
 
 //public class KnowledgeSystemFragment extends BaseVpFragment<KnowledgeSystemPresenter> implements KnowledgeSystemContract.View, RotateAnimation.InterpolatedTimeListener, Animation.AnimationListener {
-public class KnowledgeSystemFragment extends BaseEmptyVcFragment implements KnowledgeSystemContract.View, RotateAnimation.InterpolatedTimeListener, Animation.AnimationListener {
+public class KnowledgeSystemFragment extends BaseEmptyVcFragment {
+    @BindView(R2.id.title_content_text)
+    TextView mTitleContentText;
+
+    @Override
+    public ViewGroup getViewGroup(View view) {
+        return (ViewGroup) view.findViewById(com.example.tome.core.R.id.scrollView);
+    }
+
+    @Override
+    protected int getLayout() {
+        return R.layout.mall_fragment_knowledge_system;
+    }
+
+    @Override
+    protected void initTitle() {
+        mTitleContentText.setText("周边发现");
+
+    }
+
+    @Override
+    protected void initView() {
+        /*showEmptyView();
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                try {
+                    Thread.sleep(3000);//休眠3秒
+                    mEmptyView.hide();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();*/
+    }
+
+
+
+
+
+    /*
 
     @BindView(R2.id.title_back)
     TextView mTitleBack;
@@ -58,9 +99,11 @@ public class KnowledgeSystemFragment extends BaseEmptyVcFragment implements Know
     @BindView(R2.id.civ_welfare_two)
     CircularImageView mCivWelfareTwo;
 
-    /**
+    */
+/**
      * true:正面  false:反面
-     */
+     *//*
+
     private boolean  rotateState = true;
     private boolean             enableRefresh;
     private boolean isAnimation;
@@ -102,7 +145,7 @@ public class KnowledgeSystemFragment extends BaseEmptyVcFragment implements Know
 
     @Override
     protected void initTitle() {
-        mTitleContentText.setText("知识体系");
+        mTitleContentText.setText("周边发现");
 
     }
 
@@ -112,7 +155,7 @@ public class KnowledgeSystemFragment extends BaseEmptyVcFragment implements Know
         initCircularImage();
         //获取数据
        // mPresenter.getKnowledgeSystemData();
-        loadData();
+        //loadData();
     }
 
     @Override
@@ -166,9 +209,11 @@ public class KnowledgeSystemFragment extends BaseEmptyVcFragment implements Know
         civWelfare.setBorderWidth(0);
     }
 
-    /**
+    */
+/**
      * 翻转动画
-     */
+     *//*
+
     private void initAnimation() {
         enableRefresh = true;
         float             cY         = mCivWelfareOne.getHeight() / 2.0f;
@@ -249,9 +294,11 @@ public class KnowledgeSystemFragment extends BaseEmptyVcFragment implements Know
             ImageLoaderHelper.getInstance().load(mContext, mCircleImg3, mCivWelfareTwo);
         }
 
-        /**
+        */
+/**
          * 第一张圆图点击
-         */
+         *//*
+
         mCivWelfareOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -263,9 +310,11 @@ public class KnowledgeSystemFragment extends BaseEmptyVcFragment implements Know
             }
         });
 
-        /**
+        */
+/**
          * 第二张圆图点击
-         */
+         *//*
+
         mCivWelfareTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -278,10 +327,12 @@ public class KnowledgeSystemFragment extends BaseEmptyVcFragment implements Know
         });
     }
 
-    /**
+    */
+/**
      * 监听到翻转进度过半时，更新图片显示内容。
      * @param interpolatedTime
-     */
+     *//*
+
     @Override
     public void interpolatedTime(float interpolatedTime) {
         if (enableRefresh && interpolatedTime > 0.5f) {
@@ -309,10 +360,12 @@ public class KnowledgeSystemFragment extends BaseEmptyVcFragment implements Know
         }
     }
 
-    /**
+    */
+/**
      * 翻转动画监听
      * @param animation
-     */
+     *//*
+
     @Override
     public void onAnimationStart(Animation animation) {
 
@@ -345,6 +398,7 @@ public class KnowledgeSystemFragment extends BaseEmptyVcFragment implements Know
         isAnimation = false;
         L.d("onHiddenChanged:+");
     }
+*/
 
 
 }

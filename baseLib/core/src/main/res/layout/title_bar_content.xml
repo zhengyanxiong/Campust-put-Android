@@ -73,7 +73,7 @@
                 android:layout_marginLeft="100dp"
                 android:padding="10dp"
                 android:src="@drawable/icon_settings"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
 
         </RelativeLayout>

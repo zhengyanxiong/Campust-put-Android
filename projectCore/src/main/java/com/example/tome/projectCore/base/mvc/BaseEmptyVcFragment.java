@@ -18,7 +18,7 @@ public abstract class BaseEmptyVcFragment extends BaseVcFragment {
     public EmptyView mEmptyView;
     public View mEmptyGroup;
 
-//用getview获取不到
+    //用getview获取不到
     @Override
     protected void init(View view) {
         if (view == null) {
