@@ -1,4 +1,4 @@
-package com.example.tome.module_shop_cart.utils;
+package com.example.tome.module_shop_mall.util;
 
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;

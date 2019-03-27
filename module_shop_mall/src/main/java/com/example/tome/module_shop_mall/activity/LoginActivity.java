@@ -17,7 +17,7 @@ import com.example.tome.core.util.SPUtil;
 import com.example.tome.core.util.StatuBarCompat;
 import com.example.tome.core.util.StringUtils;
 import com.example.tome.core.util.ToastUtils;
-import com.example.tome.module_shop_cart.utils.BasicTool;
+import com.example.tome.module_shop_mall.util.BasicTool;
 import com.example.tome.module_shop_mall.R;
 import com.example.tome.module_shop_mall.R2;
 import com.example.tome.module_shop_mall.bean.LoginBean;
