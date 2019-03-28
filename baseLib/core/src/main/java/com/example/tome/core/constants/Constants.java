@@ -6,5 +6,5 @@ package com.example.tome.core.constants;
 public interface Constants {
     String MEMBER_TOCKEN = "member";
 
-    String HOME_PAGE_LINK = "http://192.168.43.152:8000";
+    String HOME_PAGE_LINK = "http://192.168.137.1:8000";
 }

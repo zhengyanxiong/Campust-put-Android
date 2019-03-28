@@ -128,9 +128,9 @@ public abstract class BaseObserver<T> extends ResourceObserver<T> {
         } else if (e instanceof ServerException) {
             mView.showError(e.toString(),"-1");
         } else if (e instanceof HttpException) {
-            mView.showError("网络异常","-1");
+            mView.showError("网络异常，请稍后再试！","-1");
         } else {
-            mView.showError("未知错误","-1");
+            mView.showError("网络异常，请稍后再试！","-1");
 
         }
        // if (isShowError) {
