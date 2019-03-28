@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -28,8 +29,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
+
+import com.example.tome.core.constants.Constants;
 import com.example.tome.core.util.Arith;
 import com.example.tome.core.util.L;
+import com.example.tome.core.util.SPUtil;
 import com.orhanobut.logger.Logger;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -63,6 +67,18 @@ import org.json.JSONObject;
  * @author liubp
  */
 public class BasicTool {
+
+    /**
+     * 从本地查找用户token
+     * @param context
+     * @param key
+     * @param object
+     * @return
+     */
+    public static String getMemberToken(Context context,String key,Object object){
+        String memberToken = (String)SPUtil.get(context,key,object);
+        return memberToken;
+    }
 
     /**
      * 检测字符串是否为空，

@@ -25,7 +25,7 @@ public class BaseHost {
             case HostType.NETEASE_NEWS_VIDEO:
                // host = NETEAST_HOST; String BASE_URL = "http://www.wanandroid.com/";
                 //host = "http://192.168.43.152:8762" ;
-                host = "http://192.168.137.1:8762" ;
+                host = "http://10.103.158.181:8762" ;
                 //host = "http://www.wanandroid.com/" ;
                 break;
             case HostType.GANK_GIRL_PHOTO:

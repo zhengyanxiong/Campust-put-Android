@@ -3,6 +3,7 @@ package com.example.tome.core.net;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.SparseArray;
+
 import com.example.tome.core.BuildConfig;
 import com.example.tome.core.base.BaseHost;
 import com.example.tome.core.base.HostType;
@@ -11,9 +12,11 @@ import com.example.tome.core.util.NetUtils;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+
 import okhttp3.Cache;
 import okhttp3.CacheControl;
 import okhttp3.Interceptor;
@@ -25,11 +28,6 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * @Created by TOME .
- * @时间 2018/5/15 16:21
- * @描述 ${TODO}
- */
 
 public class HttpHelper {
 
@@ -71,11 +69,12 @@ public class HttpHelper {
 
     /**
      * 构造方法私有
+     *
      * @param hostType
      */
-    private HttpHelper(int hostType){
+    private HttpHelper(int hostType) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        if (BuildConfig.DEBUG){
+        if (BuildConfig.DEBUG) {
             //开启Log
             HttpLoggingInterceptor logInterceptor = new HttpLoggingInterceptor(new HttpLogger());
             logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -85,7 +84,7 @@ public class HttpHelper {
         File cacheFile = new File(BaseApplication.getAppContext().getCacheDir(), "cache");
         Cache cache = new Cache(cacheFile, 1024 * 1024 * 100); //100Mb
         //增加头部信息
-        Interceptor headerInterceptor =new Interceptor() {
+        Interceptor headerInterceptor = new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request build = chain.request().newBuilder()
@@ -95,17 +94,11 @@ public class HttpHelper {
             }
         };
 
-       // okHttpClient = new OkHttpClient.Builder();
-
         builder.readTimeout(READ_TIME_OUT, TimeUnit.MILLISECONDS)
                 .connectTimeout(CONNECT_TIME_OUT, TimeUnit.MILLISECONDS)
-               // .addInterceptor(mRewriteCacheControlInterceptor)
-              //  .addNetworkInterceptor(mRewriteCacheControlInterceptor)
                 .addNetworkInterceptor(new StethoInterceptor())
-               // .addInterceptor(headerInterceptor)
-                ;
-               // .cache(cache)
-               // .build();
+        ;
+
 
         okHttpClient = builder.build();
 
@@ -118,18 +111,8 @@ public class HttpHelper {
                 //.addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
-
-       // movieService = retrofit.create(ApiService.class);
     }
 
-  /*  public static HttpHelper getDefault(int hostType) {
-        HttpHelper retrofitManager = sRetrofitManager.get(hostType);
-        if (retrofitManager == null) {
-            retrofitManager = new HttpHelper(hostType);
-            sRetrofitManager.put(hostType, retrofitManager);
-        }
-        return retrofitManager;
-    }*/
 
     public static Retrofit getDefault(int hostType) {
         HttpHelper retrofitManager = sRetrofitManager.get(hostType);
@@ -150,6 +133,7 @@ public class HttpHelper {
     public static String getCacheControl() {
         return NetUtils.isNetConnected(BaseApplication.getAppContext()) ? CACHE_CONTROL_AGE : CACHE_CONTROL_CACHE;
     }
+
     /**
      * 云端响应头拦截器，用来配置缓存策略
      * Dangerous interceptor that rewrites the server's cache-control header.
@@ -162,7 +146,7 @@ public class HttpHelper {
             //检查网络状态
             if (!NetUtils.isNetConnected(BaseApplication.getAppContext())) {
                 request = request.newBuilder()
-                        .cacheControl(TextUtils.isEmpty(cacheControl)? CacheControl.FORCE_NETWORK:CacheControl.FORCE_CACHE)
+                        .cacheControl(TextUtils.isEmpty(cacheControl) ? CacheControl.FORCE_NETWORK : CacheControl.FORCE_CACHE)
                         .build();
             }
             Response originalResponse = chain.proceed(request);

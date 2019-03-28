@@ -19,6 +19,8 @@ import com.example.tome.core.constants.Constants;
 import com.example.tome.core.util.StatuBarCompat;
 import com.example.tome.core.util.widgetUtils.WebViewInitUtils;
 import com.example.tome.module_shop_mall.activity.MainActivity;
+import com.example.tome.module_shop_mall.base.Cookies;
+import com.example.tome.module_shop_mall.util.BasicTool;
 import com.example.tome.projectCore.base.mvp.BaseVpListFragment;
 import com.example.tome.core.util.L;
 import com.example.tome.projectCore.bean.EventBusBean;
@@ -54,6 +56,14 @@ public class HomeFragment extends BaseVpFragment<HomeContract.View, HomeContract
         StatuBarCompat.setImmersiveStatusBarWithView(true,getActivity());
         mImmersionBar.transparentBar().init();
         WebViewInitUtils.init(getActivity(),webView);
+        String token = BasicTool.getMemberToken(getActivity(),Constants.MEMBER_TOCKEN,"");
+        if(null == token || "".equals(token)){
+            L.d("未登录，开始设置token为空.................");
+            Cookies.synCookies(getActivity(),Constants.HOME_PAGE_LINK,Constants.APP_MEMBER_TOCKEN,"");
+        } else {
+            L.d("已登录，开始设置token{"+token+"}..................");
+            Cookies.synCookies(getActivity(),Constants.HOME_PAGE_LINK,Constants.APP_MEMBER_TOCKEN,token);
+        }
         webView.loadUrl(Constants.HOME_PAGE_LINK);
 
         //点击拦截 true表示拦截, false表示不拦截
