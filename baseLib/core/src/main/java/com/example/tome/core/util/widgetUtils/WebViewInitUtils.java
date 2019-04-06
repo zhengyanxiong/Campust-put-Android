@@ -20,6 +20,7 @@ public class WebViewInitUtils {
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);
         // 设置支持javaScript
         settings.setJavaScriptEnabled(true);
+        settings.setJavaScriptCanOpenWindowsAutomatically(true);
         settings.setSaveFormData(true);
         // 不保存密码
         settings.setSavePassword(false);

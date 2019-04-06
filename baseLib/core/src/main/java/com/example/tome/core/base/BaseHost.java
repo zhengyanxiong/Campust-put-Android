@@ -13,6 +13,10 @@ public class BaseHost {
     //干货集中营 API
     public static final String SINA_PHOTO_HOST = "http://gank.io/api/";
 
+
+    public static final String CAMPUS_SERVER_HOST = "http://192.168.43.254";
+
+
     /**
      * 获取对应的host
      *
@@ -24,8 +28,8 @@ public class BaseHost {
         switch (hostType) {
             case HostType.NETEASE_NEWS_VIDEO:
                // host = NETEAST_HOST; String BASE_URL = "http://www.wanandroid.com/";
-                //host = "http://192.168.43.152:8762" ;
-                host = "http://10.103.158.181:8762" ;
+                host = BaseHost.CAMPUS_SERVER_HOST +":8762" ;
+                //host = "http://10.21.100.101:8762" ;
                 //host = "http://www.wanandroid.com/" ;
                 break;
             case HostType.GANK_GIRL_PHOTO:
