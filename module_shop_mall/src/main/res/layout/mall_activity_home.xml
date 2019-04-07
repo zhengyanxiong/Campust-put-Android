@@ -24,12 +24,40 @@
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/bottom_navigation_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_gravity="bottom"
             android:background="@color/white"
             app:itemIconTint="@drawable/mall_nav_item_color_state"
             app:itemTextColor="@drawable/mall_nav_item_color_state"
             app:menu="@menu/mall_bottom_navigation_home">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:elevation="16dp">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2" />
+
+                <ImageView
+                    android:id="@+id/navigation_center_image"
+                    android:layout_width="54dp"
+                    android:layout_height="54dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="1dp"
+                    android:padding="0dp"
+                    android:src="@mipmap/ic_tab_add" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2" />
+
+            </LinearLayout>
 
         </android.support.design.widget.BottomNavigationView>
     </LinearLayout>

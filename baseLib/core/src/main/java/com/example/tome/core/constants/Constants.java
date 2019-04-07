@@ -13,6 +13,9 @@ public interface Constants {
     //h5工程地址
     String HOME_PAGE_LINK = BaseHost.CAMPUS_SERVER_HOST+":8000";
 
+    //h5发布商品地址
+    String PUBLISH_GOODS_LINK = BaseHost.CAMPUS_SERVER_HOST+":8000/good/publishGoods";
+
     //上传图片到服务器地址
     String NGINGX_UPLOAD_LINK = BaseHost.CAMPUS_SERVER_HOST+":8788/file/fileUpload";
 }

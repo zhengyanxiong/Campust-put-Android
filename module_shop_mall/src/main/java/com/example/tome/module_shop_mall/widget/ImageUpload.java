@@ -1,4 +1,386 @@
 package com.example.tome.module_shop_mall.widget;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.CursorLoader;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+
+import com.example.tome.core.constants.Constants;
+import com.example.tome.core.util.L;
+import com.example.tome.core.util.PictureCompressionUtils;
+import com.example.tome.core.util.ToastUtils;
+import com.fec.core.router.arouter.IntentKV;
+import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 public class ImageUpload {
+    private static String TAG = "ImageAlertDialogs";
+
+    private final String IMAGEPATH = "/sdcard/Android/data/com.fecmobile.integrityec/cache";
+    private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE2 = 7;
+    private Uri imageUri;
+
+    private Activity activity;
+
+    private File outFile;
+    private String mImageName;
+
+    ImageAlertDialogs.OnImageSelectResult selectListener;
+    private File currentFile;
+    private Uri localUri = null;
+    private Uri mPhotoUri;
+    File photoFile = null;
+    private Gson gson = new Gson();
+    //临时文件
+    private String mPublicPhotoPath;
+    private String mImg_url;
+    private String name_url;
+    private String mImageFileName;
+    private File mPath;
+    OnImageUploadResult imageUploadResult;
+
+    public ImageUpload(Activity activity){
+        this.activity = activity;
+        initFileCache();
+    }
+
+    public void setOnImageUploadResult(OnImageUploadResult uploadResult){
+        this.imageUploadResult = uploadResult;
+    }
+
+    public interface OnImageUploadResult {
+        void getImageUrl(String url);
+    }
+
+    private void initFileCache() {
+        mPath = null;
+        if (hasSdcard()) {
+            mPath = Environment.getExternalStoragePublicDirectory(
+                    Environment.DIRECTORY_DCIM);
+
+        }
+        Date date = new Date();
+        String timeStamp = getTime(date, "yyyyMMdd_HHmmss", Locale.CHINA);
+        mImageFileName = "Camera/" + "IMG_" + timeStamp + ".jpg";
+        File image = new File(mPath, mImageFileName);
+
+        imageUri = Uri.fromFile(image);
+
+        //创建临时图片文件
+        try {
+            photoFile = createPublicImageFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void selectImage() {
+        Intent intent = new Intent(Intent.ACTION_PICK, null);
+        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+        activity.startActivityForResult(intent, IntentKV.FLAG_IMAGE_FROM_ALBUM);
+    }
+
+    public void onActivityResult(int flag, Intent data) {
+        if (ContextCompat.checkSelfPermission(activity,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(activity,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    MY_PERMISSIONS_REQUEST_CALL_PHONE2);
+            L.d(TAG, "权限控制====开启写的权限");
+        }
+
+        if (flag == IntentKV.FLAG_IMAGE_FROM_ALBUM) {
+            //相册选择
+            try {
+                String realPathFromURI = getRealPathFromURI(data.getData());
+
+                if (ContextCompat.checkSelfPermission(activity,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {
+
+                    L.d(TAG, "权限控制====拥有阅读的权限");
+                }
+
+
+                /*带截图*/
+                if (realPathFromURI.startsWith("file://")) {
+
+                    L.d(TAG, "相册imageUri" + Uri.parse(realPathFromURI));
+                    L.d(TAG, "相册" + Uri.parse(realPathFromURI).getPath());
+
+                    final String compressImage = PictureCompressionUtils.compressImage(Uri.parse(realPathFromURI).getPath(), mPublicPhotoPath, 30);
+
+                    final File compressedPic = new File(compressImage);
+                    if (compressedPic.exists()) {
+                        selectListener.getImage(new File(compressImage));
+                    } else {//直接上传
+                        selectListener.getImage(new File(Uri.parse(realPathFromURI).getPath()));
+                    }
+
+
+                } else {
+//                    Crop crop = Crop.of(Uri.parse("file://" + realPathFromURI), imageUri);
+//
+//                    L.d("================相册imageUri" + Uri.parse(realPathFromURI));
+//                    L.d("================相册" + Uri.parse(realPathFromURI).getPath());
+//
+//                    crop.asSquare();
+//                    crop.start(activity, IFlag.FLAG_IMAGE_CUTTING);
+
+
+//                            Crop.of(Uri.parse("file://" +realPathFromURI),imageUri).asSquare().start(getActivity(),Flags.REQUESTCODE_CUTTING);
+//                            startPhotoZoom(Uri.parse("file://" +realPathFromURI));
+
+                    L.d(TAG, "相册压缩前的路径" + Uri.parse("file://" + realPathFromURI).getPath());
+                    final String compressImage = PictureCompressionUtils.compressImage(Uri.parse("file://" + realPathFromURI).getPath(), mPublicPhotoPath, 30);
+
+                    final File compressedPic = new File(compressImage);
+                    if (compressedPic.exists()) {
+                        post_file(new File(compressImage));
+
+                        L.d(TAG, "相册imageUri有压缩" + Uri.parse(realPathFromURI));
+                        L.d(TAG, "相册有压缩" + Uri.parse(realPathFromURI).getPath());
+                    } else {//直接上传
+                        post_file(new File(Uri.parse("file://" + realPathFromURI).getPath()));
+                        L.d(TAG, "相册imageUri没有压缩" + Uri.parse(realPathFromURI));
+                        L.d(TAG, "相册没有压缩" + Uri.parse(realPathFromURI).getPath());
+                    }
+                }
+                /*不带截图*/
+                L.d(TAG, "realPathFromURI" + realPathFromURI);
+//                final String compressImage = PictureCompressionUtils.compressImage(realPathFromURI, mPublicPhotoPath, 30);
+//
+//                final File compressedPic = new File(compressImage);
+//                if (compressedPic.exists()) {
+//                    selectListener.getImage(new File(compressImage));
+//                }else{//直接上传
+//                    selectListener.getImage(new File(realPathFromURI));
+//                }
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (flag == IntentKV.FLAG_IMAGE_FROM_CAMERA) {
+
+
+            if (ContextCompat.checkSelfPermission(activity,
+                    Manifest.permission.READ_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                L.d(TAG, "权限控制====拥有阅读的权限");
+            }
+            File externalCacheDir = activity.getExternalCacheDir();
+
+
+            //拍照获取
+            /*----带截图--*/
+//            Crop crop = Crop.of(Uri.fromFile(outFile), imageUri);
+//            crop.asSquare();
+//            crop.start(activity, IFlag.FLAG_IMAGE_CUTTING);
+
+
+//            /*----不带截图----*/
+            if (selectListener != null) {
+//                selectListener.getImage(new File(imageUri.getPath()));
+
+
+                L.d(TAG, "相机imageUri" + imageUri);
+                L.d(TAG, "相机mPhotoUri" + mPhotoUri);
+                L.d(TAG, "相机" + imageUri.getPath());
+                L.d(TAG, "相机" + new File(imageUri.getPath()));
+
+
+                if (ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE)
+                        == PackageManager.PERMISSION_GRANTED) {
+//                    拥有读写文件权限
+                    L.d(TAG, "相机***拥有读写文件权限");
+                } else {
+                    L.d(TAG, "相机***没有读写权限");
+                    //没有读写权限
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                        ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                                140);
+                    } else {
+                    }
+                }
+
+                //这里已经得到了权限了,但如果我们使用imageUrl.getPath 他却一直报FileNotFoundException
+                String path2 = "/storage/emulated/0/DCIM/" + mImageFileName;
+                final String compressImage = PictureCompressionUtils.compressImage(path2, mPublicPhotoPath, 30);
+
+                final File compressedPic = new File(compressImage);
+                if (compressedPic.exists()) {
+                    selectListener.getImage(new File(compressImage));
+                } else {//直接上传
+                    selectListener.getImage(new File(imageUri.getPath()));
+                }
+            }
+
+
+        } else if (flag == IntentKV.FLAG_IMAGE_CUTTING) {
+            if (selectListener != null) {
+                selectListener.getImage(new File(imageUri.getPath()));
+
+
+                L.d(TAG, "相册" + imageUri);
+                L.d(TAG, "相册" + imageUri.getPath());
+                L.d(TAG, "相册" + new File(imageUri.getPath()));
+            }
+        } else if (flag == IntentKV.FLAG_IMAGE_CUTTING2)
+
+        {
+            if (selectListener != null) {
+            }
+
+        }
+
+    }
+
+    /**
+     * 根据content:///图片需要获取图片真实路径
+     */
+    private String getRealPathFromURI(Uri contentUri) { //传入图片uri地址
+        String path = contentUri.getPath();
+        String uriString = contentUri.toString();
+        if (path.startsWith("file")) {
+            return path;
+        }
+        if (uriString.startsWith("file")) {
+            return uriString;
+        }
+        String[] proj = {MediaStore.Images.Media.DATA};
+        CursorLoader loader = new CursorLoader(activity, contentUri, proj, null, null, null);
+        Cursor cursor = loader.loadInBackground();
+        if (cursor == null) {
+            return path;
+        }
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
+
+    /**
+     * 判断sdcard是否被挂载
+     *
+     * @return
+     */
+    public static boolean hasSdcard() {
+        if (Environment.getExternalStorageState().equals(
+                Environment.MEDIA_MOUNTED)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 获取时间的方法
+     *
+     * @param date
+     * @param mode
+     * @param locale
+     * @return
+     */
+    private String getTime(Date date, String mode, Locale locale) {
+        SimpleDateFormat format = new SimpleDateFormat(mode, locale);
+        return format.format(date);
+    }
+
+    private File createPublicImageFile() throws IOException {
+        File path = null;
+        if (hasSdcard()) {
+            path = Environment.getExternalStoragePublicDirectory(
+                    Environment.DIRECTORY_DCIM);//
+        }
+        Date date = new Date();
+        String timeStamp = getTime(date, "yyyyMMdd_HHmmss", Locale.CHINA);
+        String imageFileName = "Camera/" + "IMG_" + timeStamp + ".jpg";
+        File image = new File(path, imageFileName);
+        mPublicPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
+    protected void post_file(File file) {
+
+        final String url = Constants.NGINGX_UPLOAD_LINK;
+        OkHttpClient client = new OkHttpClient();
+        // form 表单形式上传
+        MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
+        if (file != null) {
+            // MediaType.parse() 里面是上传的文件类型。
+            RequestBody body = RequestBody.create(MediaType.parse("image/*"), file);
+            String filename = file.getName();
+            // 参数分别为， 请求key ，文件名称 ， RequestBody
+            requestBody.addFormDataPart("file", file.getName(), body);
+        }
+       /* if (map != null) {
+            // map 里面是请求中所需要的 key 和 value
+            for (Map.Entry entry : map.entrySet()) {
+                requestBody.addFormDataPart(valueOf(entry.getKey()), valueOf(entry.getValue()));
+            }
+        }*/
+        Request request = new Request.Builder().url(url).post(requestBody.build()).build();
+        // readTimeout("请求超时时间" , 时间单位);
+        client.newBuilder().readTimeout(6000, TimeUnit.MILLISECONDS).build().newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                L.d("upload faile" + e);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    try {
+                        String str = response.body().string();
+                        JSONObject object = new JSONObject(str);
+                        L.d("lfq", response.message() + " , body " + str);
+
+                        if ("200".equals(object.getString("code"))) {
+                            JSONObject dataObject = object.getJSONObject("data");
+                            String url = dataObject.getString("url");
+                            imageUploadResult.getImageUrl(url);
+                            L.d("图片上传成功，返回图片地址：" + url);
+                        } else {
+                            L.d( "图片上传失败！");
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                } else {
+                    L.d("lfq", response.message() + " error : body " + response.body().string());
+                    ToastUtils.showLong(activity, "图片上传失败！");
+                }
+            }
+        });
+
+    }
 }

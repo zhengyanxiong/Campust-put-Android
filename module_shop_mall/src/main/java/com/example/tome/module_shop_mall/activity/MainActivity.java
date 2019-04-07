@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -49,6 +50,8 @@ public class MainActivity extends BaseVcPermissionActivity implements View.OnCli
     BottomNavigationView mBottomNavigationView;
     @BindView(R2.id.drawer_layout)
     DrawerLayout mDrawerLayout;
+    @BindView(R2.id.navigation_center_image)
+    ImageView imageAdd;
 
     private static String TAG = "HomeActivity";
     private MenuItem menuItem;
@@ -63,7 +66,9 @@ public class MainActivity extends BaseVcPermissionActivity implements View.OnCli
 
     @Override
     public void onClick(View view) {
-
+        if(view.getId() == R.id.navigation_center_image){
+            startActivity(new Intent(MainActivity.this,PublishiGoodsActivity.class));
+        }
     }
 
     @Override
@@ -79,6 +84,7 @@ public class MainActivity extends BaseVcPermissionActivity implements View.OnCli
 
     @Override
     protected void initView() {
+        imageAdd.setOnClickListener(this);
         StatuBarCompat.setImmersiveStatusBar(true, Color.WHITE, this);
         selectImageDialog = new ImageAlertDialogs(this);
         //注册EventBus
@@ -116,6 +122,7 @@ public class MainActivity extends BaseVcPermissionActivity implements View.OnCli
         mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
                 if (item.getItemId() == R.id.tab_home) {
                     addFragment(R.id.layout_pager, mFragmentList.get(0));
                 } else if (item.getItemId() == R.id.tab_find) {

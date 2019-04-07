@@ -78,33 +78,6 @@ public class HomeFragment extends BaseVpFragment<HomeContract.View, HomeContract
             L.d("已登录，开始设置token{"+token+"}..................");
             Cookies.synCookies(getActivity(),Constants.HOME_PAGE_LINK,Constants.APP_MEMBER_TOCKEN,token);
         }
-        webView.setWebChromeClient(new WebChromeClient(){
-            // For Android < 3.0
-            public void openFileChooser(ValueCallback<Uri> valueCallback) {
-                uploadMessage = valueCallback;
-                selectImageDialog.show();
-            }
-
-            // For Android  >= 3.0
-            public void openFileChooser(ValueCallback valueCallback, String acceptType) {
-                uploadMessage = valueCallback;
-                selectImageDialog.show();
-            }
-
-            //For Android  >= 4.1
-            public void openFileChooser(ValueCallback<Uri> valueCallback, String acceptType, String capture) {
-                uploadMessage = valueCallback;
-                selectImageDialog.show();
-            }
-
-            // For Android >= 5.0
-            @Override
-            public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, WebChromeClient.FileChooserParams fileChooserParams) {
-                uploadMessageAboveL = filePathCallback;
-                selectImageDialog.show();
-                return true;
-            }
-        });
         webView.loadUrl(Constants.HOME_PAGE_LINK);
 
 
@@ -135,23 +108,5 @@ public class HomeFragment extends BaseVpFragment<HomeContract.View, HomeContract
         return this;
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (selectImageDialog != null && resultCode == RESULT_OK) {
-            selectImageDialog.onActivityResult(requestCode, data);
-        }
-    }
-
-
-
-    private void openImageChooserActivity() {
-        //调用自己的图库
-        Intent i = new Intent(Intent.ACTION_GET_CONTENT);
-        i.addCategory(Intent.CATEGORY_OPENABLE);
-        i.setType("image/*");
-        //selectImageDialog.show();
-        getActivity().startActivityForResult(Intent.createChooser(i, "Image Chooser"), FILE_CHOOSER_RESULT_CODE);
-    }
 
 }
