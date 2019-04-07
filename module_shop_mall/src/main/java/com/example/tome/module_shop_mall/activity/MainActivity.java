@@ -29,6 +29,7 @@ import com.example.tome.module_shop_mall.fagment.MyCenterFragment;
 import com.example.tome.module_shop_mall.fagment.NavigationV2Fragment;
 import com.example.tome.module_shop_mall.fagment.ProjectFragment;
 import com.example.tome.module_shop_mall.helper.BottomNavigationViewHelper;
+import com.example.tome.module_shop_mall.widget.ImageAlertDialogs;
 import com.example.tome.projectCore.base.mvc.BaseVcPermissionActivity;
 
 import com.fec.core.router.arouter.RouterURLS;
@@ -58,6 +59,7 @@ public class MainActivity extends BaseVcPermissionActivity implements View.OnCli
     private TextView mMUsTv;
     private List<Fragment> mFragmentList;
     private Fragment mCurrentFragment;
+    private ImageAlertDialogs selectImageDialog;
 
     @Override
     public void onClick(View view) {
@@ -78,17 +80,19 @@ public class MainActivity extends BaseVcPermissionActivity implements View.OnCli
     @Override
     protected void initView() {
         StatuBarCompat.setImmersiveStatusBar(true, Color.WHITE, this);
-
+        selectImageDialog = new ImageAlertDialogs(this);
         //注册EventBus
         super.regEvent = true;
         initFragment();
         initBottomNavigationView();
+
+
     }
 
 
     private void initFragment() {
         mFragmentList = new ArrayList<>();
-        mFragmentList.add(new HomeFragment());
+        mFragmentList.add(new HomeFragment(selectImageDialog));
         mFragmentList.add(new KnowledgeSystemFragment());
         mFragmentList.add(new NavigationV2Fragment());
         mFragmentList.add(new MyCenterFragment());
@@ -154,5 +158,10 @@ public class MainActivity extends BaseVcPermissionActivity implements View.OnCli
         }
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (selectImageDialog != null && resultCode == RESULT_OK) {
+            selectImageDialog.onActivityResult(requestCode, data);
+        }
+    }
 }
