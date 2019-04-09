@@ -18,4 +18,13 @@ public interface Constants {
 
     //上传图片到服务器地址
     String NGINGX_UPLOAD_LINK = BaseHost.CAMPUS_SERVER_HOST+":8788/file/fileUpload";
+
+    //用户首页
+    String USER_HOME_LINK = BaseHost.CAMPUS_SERVER_HOST+":8000/user/userHome";
+
+    //用户信息资料
+    String USER_INFORMATION_LINK = BaseHost.CAMPUS_SERVER_HOST+":8000/information";
+
+    //用户注册
+    String USER_REGISTER_LINK = BaseHost.CAMPUS_SERVER_HOST+":8000/register";
 }

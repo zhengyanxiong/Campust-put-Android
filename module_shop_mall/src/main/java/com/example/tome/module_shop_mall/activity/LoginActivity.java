@@ -44,6 +44,7 @@ public class LoginActivity extends BaseVpActivity<ILoginsContract.View,ILoginsCo
     CheckBox mCbShowHidePwd;
     @BindView(R2.id.btn_login)
     Button mBtnLogin;
+    //注册
     @BindView(R2.id.tv_service_phone_remark)
     TextView mTvServicePhoneRemark;
     @BindView(R2.id.layout_login)
@@ -81,7 +82,7 @@ public class LoginActivity extends BaseVpActivity<ILoginsContract.View,ILoginsCo
             public void onClick(View view) {
                 if(checkPage()){
                     LoginBean loginBean = new LoginBean();
-                    loginBean.setUserName(mEtdTel.getText().toString());
+                    loginBean.setStudentId(mEtdTel.getText().toString());
                     loginBean.setPassword(mEtdPwd.getText().toString());
                     mPresenter.login(loginBean);
                 }
@@ -98,6 +99,13 @@ public class LoginActivity extends BaseVpActivity<ILoginsContract.View,ILoginsCo
                 } else {
                     mEtdPwd.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 }
+            }
+        });
+
+        mTvServicePhoneRemark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
             }
         });
     }

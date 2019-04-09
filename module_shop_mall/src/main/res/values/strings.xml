@@ -57,7 +57,7 @@
     <string name="user_set">设置</string>
 
     <!--登录-->
-    <string name="mall_login_find_pwd_hint_1">如忘记密码，请拨打客服热线--申请重置密码</string>
+    <string name="mall_login_find_pwd_hint_1">没有账号？注册</string>
     <string name="mall_login_find_pwd_hint_2">如忘记密码，请拨打客服热线</string>
     <string name="mall_login_find_pwd_hint_3"> 申请重置密码</string>
     <string name="mall_member_remark_1">如忘记密码请拨打客服热线--申请重置密码</string>

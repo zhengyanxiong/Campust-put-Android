@@ -2,15 +2,18 @@ package com.example.tome.module_shop_mall.widget;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 
 import com.example.tome.core.constants.Constants;
 import com.example.tome.core.util.L;
@@ -105,6 +108,44 @@ public class ImageUpload {
         activity.startActivityForResult(intent, IntentKV.FLAG_IMAGE_FROM_ALBUM);
     }
 
+    public void openCamera(Context context) {
+        String state = Environment.getExternalStorageState();
+        if (state.equals(Environment.MEDIA_MOUNTED)) {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+            File file = Environment.getExternalStoragePublicDirectory(
+                    Environment.DIRECTORY_DCIM);
+            outFile = new File(file, mImageFileName);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                //如果是7.0及以上的系统使用FileProvider的方式创建一个Uri
+                imageUri = FileProvider.getUriForFile(context, "com.fecmobile.integrityec.fileprovider", outFile);
+//                mPhotoUri = FileProvider.getUriForFile(contextWeak.get(), "com.fecmobile.integrityec.fileprovider", outFile);
+//                mPhotoUri = FileProvider.getUriForFile(contextWeak.get(), "com.fecmobile.integrityec.fileprovider", photoFile);
+                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
+
+                if (ContextCompat.checkSelfPermission(activity, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED ||
+                        ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+//                    Toast.makeText(this,"执行了权限请求",Toast.LENGTH_LONG).show();
+                }
+            } else {
+                //7.0以下使用这种方式创建一个Uri
+                imageUri = Uri.fromFile(outFile);
+            }
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+            intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
+            activity.startActivityForResult(intent, IntentKV.FLAG_IMAGE_FROM_CAMERA);
+        } else {
+            L.e(TAG, "请确认已经插入SD卡");
+        }
+
+        //将照片添加到相册中
+        galleryAddPic(mPublicPhotoPath, activity);
+    }
+
+    //处理返回的图片
     public void onActivityResult(int flag, Intent data) {
         if (ContextCompat.checkSelfPermission(activity,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -142,21 +183,7 @@ public class ImageUpload {
                     } else {//直接上传
                         selectListener.getImage(new File(Uri.parse(realPathFromURI).getPath()));
                     }
-
-
                 } else {
-//                    Crop crop = Crop.of(Uri.parse("file://" + realPathFromURI), imageUri);
-//
-//                    L.d("================相册imageUri" + Uri.parse(realPathFromURI));
-//                    L.d("================相册" + Uri.parse(realPathFromURI).getPath());
-//
-//                    crop.asSquare();
-//                    crop.start(activity, IFlag.FLAG_IMAGE_CUTTING);
-
-
-//                            Crop.of(Uri.parse("file://" +realPathFromURI),imageUri).asSquare().start(getActivity(),Flags.REQUESTCODE_CUTTING);
-//                            startPhotoZoom(Uri.parse("file://" +realPathFromURI));
-
                     L.d(TAG, "相册压缩前的路径" + Uri.parse("file://" + realPathFromURI).getPath());
                     final String compressImage = PictureCompressionUtils.compressImage(Uri.parse("file://" + realPathFromURI).getPath(), mPublicPhotoPath, 30);
 
@@ -261,6 +288,17 @@ public class ImageUpload {
 
         }
 
+    }
+
+    /**
+     * 将照片添加到相册中
+     */
+    public static void galleryAddPic(String mPublicPhotoPath, Context context) {
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        File f = new File(mPublicPhotoPath);
+        Uri contentUri = Uri.fromFile(f);
+        mediaScanIntent.setData(contentUri);
+        context.sendBroadcast(mediaScanIntent);
     }
 
     /**

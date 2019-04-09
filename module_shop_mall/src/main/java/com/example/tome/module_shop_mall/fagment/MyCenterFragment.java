@@ -26,6 +26,7 @@ import com.example.tome.core.util.UltimateBar;
 import com.example.tome.module_shop_mall.R;
 import com.example.tome.module_shop_mall.R2;
 import com.example.tome.module_shop_mall.activity.LoginActivity;
+import com.example.tome.module_shop_mall.activity.UserHomeActivity;
 import com.example.tome.module_shop_mall.arouter.RouterCenter;
 import com.example.tome.module_shop_mall.bean.ProjectClassifyBean;
 import com.example.tome.module_shop_mall.bean.UserInfor;
@@ -61,6 +62,8 @@ public class MyCenterFragment extends BaseVpFragment<MyCenterContract.View, MyCe
     TextView username;
     @BindView(R2.id.tv_email)
     TextView userEmail;
+    @BindView(R2.id.img_avatar)
+    ImageView userHead;
 
     @Override
     public MyCenterContract.Presenter createPresenter() {
@@ -109,6 +112,7 @@ public class MyCenterFragment extends BaseVpFragment<MyCenterContract.View, MyCe
             userImg.setLayoutParams(rl_user);
             showUserInfor.setVisibility(View.GONE);
             startButton.setVisibility(View.VISIBLE);
+
         }else {
             mPresenter.getUserInfor(memberToken);
             ToastUtils.showCenter(memberToken);
@@ -117,6 +121,13 @@ public class MyCenterFragment extends BaseVpFragment<MyCenterContract.View, MyCe
             userImg.setLayoutParams(rl_user);
             startButton.setVisibility(View.GONE);
             showUserInfor.setVisibility(View.VISIBLE);
+
+            userHead.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(getActivity(),UserHomeActivity.class));
+                }
+            });
         }
     }
 

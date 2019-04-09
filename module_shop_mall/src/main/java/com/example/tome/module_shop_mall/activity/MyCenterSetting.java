@@ -33,6 +33,8 @@ public class MyCenterSetting extends BaseVcActivity implements View.OnClickListe
     Toolbar mToolbar;
     @BindView(R2.id.btn_login_out)
     Button loginOut;
+    @BindView(R2.id.user_information)
+    TextView user_information;
 
     AlertDialog builder;
 
@@ -50,6 +52,7 @@ public class MyCenterSetting extends BaseVcActivity implements View.OnClickListe
     protected void initView() {
         mToolbar.setOnClickListener(this);
         loginOut.setOnClickListener(this);
+        user_information.setOnClickListener(this);
         String memberToken = (String)SPUtil.get(this,Constants.MEMBER_TOCKEN,"");
         if(null == memberToken || "".equals(memberToken)) {
             loginOut.setVisibility(View.GONE);
@@ -83,6 +86,8 @@ public class MyCenterSetting extends BaseVcActivity implements View.OnClickListe
                     }).create().show();
 
 
+        } else if (i == R.id.user_information){
+            startActivity(new Intent(MyCenterSetting.this,UserInformationActivity.class));
         }
     }
 }

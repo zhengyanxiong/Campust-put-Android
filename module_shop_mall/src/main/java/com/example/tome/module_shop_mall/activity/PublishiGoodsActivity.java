@@ -49,6 +49,7 @@ public class PublishiGoodsActivity extends BaseVcActivity implements ImageUpload
     @Override
     public void initView() {
 
+        StatuBarCompat.setImmersiveStatusBar(false,Color.WHITE,this);
         imageUpload = new ImageUpload(this);
         imageUpload.setOnImageUploadResult(this);
 
@@ -81,7 +82,7 @@ public class PublishiGoodsActivity extends BaseVcActivity implements ImageUpload
                 .addSheetItem("拍照", ActionSheetDialog.SheetItemColor.Blue, new ActionSheetDialog.OnSheetItemClickListener() {
                     @Override
                     public void onClick(int which) {
-
+                        imageUpload.openCamera(getContext());
                     }
                 })
                 .addSheetItem("从相册中选择", ActionSheetDialog.SheetItemColor.Blue, new ActionSheetDialog.OnSheetItemClickListener() {
