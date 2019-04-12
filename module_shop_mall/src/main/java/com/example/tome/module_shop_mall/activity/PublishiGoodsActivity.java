@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.support.v4.app.FragmentTransaction;
 import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
@@ -20,10 +21,12 @@ import com.example.tome.core.util.StatuBarCompat;
 import com.example.tome.core.util.widgetUtils.WebViewInitUtils;
 import com.example.tome.module_shop_mall.R;
 import com.example.tome.module_shop_mall.R2;
+import com.example.tome.module_shop_mall.arouter.RouterCenter;
 import com.example.tome.module_shop_mall.base.BaseActivity;
 import com.example.tome.module_shop_mall.widget.ActionSheetDialog;
 import com.example.tome.module_shop_mall.widget.ImageAlertDialogs;
 import com.example.tome.module_shop_mall.widget.ImageUpload;
+import com.example.tome.module_shop_mall.widget.ToActivity;
 
 import butterknife.BindView;
 
@@ -49,13 +52,16 @@ public class PublishiGoodsActivity extends BaseVcActivity implements ImageUpload
     @Override
     public void initView() {
 
-        StatuBarCompat.setImmersiveStatusBar(false,Color.WHITE,this);
+        mImmersionBar.fitsSystemWindows(true).statusBarColor(R.color.bar_grey).init();
+        StatuBarCompat.setImmersiveStatusBar(true,R.color.comment_text,this);
+
         imageUpload = new ImageUpload(this);
         imageUpload.setOnImageUploadResult(this);
 
         WebViewInitUtils.init(this, webView);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.addJavascriptInterface(new Js(), "appImageObj");
+        webView.addJavascriptInterface(new Js(),"toHomeActivity");
         webView.loadUrl(Constants.PUBLISH_GOODS_LINK);
         //点击拦截 true表示拦截, false表示不拦截
         webView.setWebViewClient(new WebViewClient() {
@@ -120,6 +126,15 @@ public class PublishiGoodsActivity extends BaseVcActivity implements ImageUpload
         @JavascriptInterface
         public void showImageDialog() {
             shows();
+        }
+
+        //跳转到首页
+        @JavascriptInterface
+        public void startHomeIntent() {
+            L.d("调用了跳转首页");
+            Intent intent = new Intent(PublishiGoodsActivity.this,MainActivity.class);
+            intent.putExtra("homeWeb",1);
+            startActivity(intent);
         }
     }
 

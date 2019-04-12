@@ -112,10 +112,14 @@ public class MainActivity extends BaseVcPermissionActivity implements View.OnCli
 
         // 预设定进来后,默认显示fragment
         int getMyCenter = getIntent().getIntExtra("toMyCenter", 0);
+        int getWebHome = getIntent().getIntExtra("homeWeb",0);
         if (getMyCenter == 4) {
             addFragment(R.id.layout_pager, mFragmentList.get(3));
             mBottomNavigationView.setSelectedItemId(mBottomNavigationView.getMenu().getItem(3).getItemId());
-        } else {
+        } else if (getWebHome == 1){
+            addFragment(R.id.layout_pager, mFragmentList.get(0));
+            mBottomNavigationView.setSelectedItemId(mBottomNavigationView.getMenu().getItem(0).getItemId());
+        } else{
             addFragment(R.id.layout_pager, mFragmentList.get(0));
         }
 

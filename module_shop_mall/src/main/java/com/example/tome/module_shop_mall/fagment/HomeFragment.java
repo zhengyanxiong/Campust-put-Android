@@ -11,6 +11,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import butterknife.BindView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bigkoo.alertview.AlertView;
 import com.bigkoo.alertview.OnItemClickListener;
 import com.example.tome.core.base.mvp.BaseVpFragment;
@@ -26,6 +27,7 @@ import com.example.tome.module_shop_mall.R;
 import com.example.tome.module_shop_mall.R2;
 import com.example.tome.module_shop_mall.contract.HomeContract;
 import com.example.tome.module_shop_mall.presenter.HomePresenter;
+import com.fec.core.router.arouter.RouterURLS;
 
 import java.io.File;
 
@@ -37,7 +39,7 @@ import static android.app.Activity.RESULT_OK;
  * @时间 2018/5/30 16:51
  * @描述 ${首页}
  */
-
+@Route(path = RouterURLS.MALL_HOME_WEB)
 @SuppressLint("ValidFragment")
 public class HomeFragment extends BaseVpFragment<HomeContract.View, HomeContract.Presenter> implements HomeContract.View {
     @BindView(R2.id.home_web_view)

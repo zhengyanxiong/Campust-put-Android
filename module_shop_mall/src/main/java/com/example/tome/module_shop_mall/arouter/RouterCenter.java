@@ -1,5 +1,6 @@
 package com.example.tome.module_shop_mall.arouter;
 
+import android.support.v4.app.Fragment;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.fec.core.router.arouter.RouterURLS;
 
@@ -81,10 +82,22 @@ public class RouterCenter {
     }
 
     /**
+     * 跳转到首页WebActivity
+     */
+    public static Fragment toHomeWeb(){
+        Fragment fragment = (Fragment) ARouter.getInstance().build(RouterURLS.MALL_HOME_WEB).navigation();
+        if (fragment == null){
+            fragment = new Fragment();
+        }
+        return fragment ;
+    }
+
+    /**
      * 跳转到个人中心设置Activity
      */
     public static void toMyCenterSetting(){
         ARouter.getInstance().build(RouterURLS.MYCENTER_SETTING).navigation();
     }
+
 
 }
