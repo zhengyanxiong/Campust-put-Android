@@ -29,6 +29,7 @@
         <activity android:name=".activity.UserHomeActivity"/>
         <activity android:name=".activity.RegisterActivity"/>
         <activity android:name=".activity.UserInformationActivity"/>
+        <activity android:name=".activity.ClipImageActivity"/>
 
 
     </application>

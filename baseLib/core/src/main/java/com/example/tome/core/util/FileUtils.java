@@ -1,13 +1,21 @@
 package com.example.tome.core.util;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Environment;
+
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Desc:文件和文件夹操作类
@@ -572,4 +580,59 @@ public final class FileUtils {
         public static final int GB   = 1073741824;
 
     }
+
+    /**
+     * 把batmap 转file
+     * @param bitmap
+     * @param filepath
+     */
+    public static String saveBitmapFile(Bitmap bitmap, String filepath){
+        File path = null;
+        if (hasSdcard()) {
+            path = Environment.getExternalStoragePublicDirectory(
+                    Environment.DIRECTORY_DCIM);//
+        }
+        Date date = new Date();
+        //String timeStamp = getTime(date, "yyyyMMdd_HHmmss", Locale.CHINA);
+        String imageFileName = "/Camera/" + "IMG_" + filepath + ".jpg";
+        File image = new File(path, imageFileName);
+        //File file=new File(filepath);//将要保存图片的路径
+        try {
+            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(image));
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+            bos.flush();
+            bos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return path+imageFileName;
+    }
+
+    /**
+     * 获取时间的方法
+     *
+     * @param date
+     * @param mode
+     * @param locale
+     * @return
+     */
+    public static  String getTime(Date date, String mode, Locale locale) {
+        SimpleDateFormat format = new SimpleDateFormat(mode, locale);
+        return format.format(date);
+    }
+
+    /**
+     * 判断sdcard是否被挂载
+     *
+     * @return
+     */
+    public static boolean hasSdcard() {
+        if (Environment.getExternalStorageState().equals(
+                Environment.MEDIA_MOUNTED)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

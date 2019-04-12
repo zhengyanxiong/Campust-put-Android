@@ -77,6 +77,8 @@ dependencies {
     //水平的tabLayout
     implementation "com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar"
 
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.9'
+
     //公用依赖包
     implementation project(':projectCore')
 }

@@ -124,25 +124,24 @@ public class ActionSheetDialog {
             // 背景图片
             if (size == 1) {
                 if (showTitle) {
-                    textView.setBackgroundResource(R.drawable.alert_bg);
+                    textView.setBackgroundResource(R.drawable.mall_actionsheet_bottom_selector);
                 } else {
-                    textView.setBackgroundResource(R.drawable.alert_bg);
+                    textView.setBackgroundResource(R.drawable.mall_actionsheet_single_selector);
                 }
             } else {
                 if (showTitle) {
                     if (i >= 1 && i < size) {
-                        textView.setBackgroundResource(R.drawable.bg_actionsheet_header);
-                        textView.setHeight(62);
+                        textView.setBackgroundResource(R.drawable.mall_actionsheet_middle_selector);
                     } else {
-                        textView.setBackgroundResource(R.drawable.alert_bg);
+                        textView.setBackgroundResource(R.drawable.mall_actionsheet_bottom_selector);
                     }
                 } else {
                     if (i == 1) {
-                        textView.setBackgroundResource(R.drawable.alert_bg);
+                        textView.setBackgroundResource(R.drawable.mall_actionsheet_top_selector);
                     } else if (i < size) {
-                        textView.setBackgroundResource(R.drawable.alert_bg);
+                        textView.setBackgroundResource(R.drawable.mall_actionsheet_middle_selector);
                     } else {
-                        textView.setBackgroundResource(R.drawable.alert_bg);
+                        textView.setBackgroundResource(R.drawable.mall_actionsheet_bottom_selector);
                     }
                 }
             }
@@ -155,9 +154,9 @@ public class ActionSheetDialog {
             }
 
             // 高度
-            float scale = context.getResources().getDisplayMetrics().density;
-            int height = (int) (45 * scale + 0.5f);
-            textView.setLayoutParams(new WindowManager.LayoutParams(WindowManager.LayoutParams.MATCH_PARENT, height));
+            /*float scale = context.getResources().getDisplayMetrics().density;
+            int height = (int) (15 * scale + 0.5f);
+            textView.setLayoutParams(new WindowManager.LayoutParams(WindowManager.LayoutParams.MATCH_PARENT, height));*/
             // 点击事件
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override

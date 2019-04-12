@@ -1,15 +1,11 @@
 package com.example.tome.module_shop_mall.activity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.Message;
-import android.support.v4.app.FragmentTransaction;
 import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
-import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -21,12 +17,8 @@ import com.example.tome.core.util.StatuBarCompat;
 import com.example.tome.core.util.widgetUtils.WebViewInitUtils;
 import com.example.tome.module_shop_mall.R;
 import com.example.tome.module_shop_mall.R2;
-import com.example.tome.module_shop_mall.arouter.RouterCenter;
-import com.example.tome.module_shop_mall.base.BaseActivity;
 import com.example.tome.module_shop_mall.widget.ActionSheetDialog;
-import com.example.tome.module_shop_mall.widget.ImageAlertDialogs;
 import com.example.tome.module_shop_mall.widget.ImageUpload;
-import com.example.tome.module_shop_mall.widget.ToActivity;
 
 import butterknife.BindView;
 

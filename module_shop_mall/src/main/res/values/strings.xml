@@ -42,7 +42,7 @@
     <string name="user_num_publish">我发布的</string>
     <string name="user_num_sell">卖出管理</string>
     <string name="user_num_buy">买到管理</string>
-    <string name="user_num_collection">收藏夹</string>
+    <string name="user_num_collection">购物车</string>
 
     <string name="user_shopping_car">购物车</string>
     <string name="user_consume_history">购买记录</string>
