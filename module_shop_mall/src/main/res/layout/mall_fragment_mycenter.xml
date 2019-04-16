@@ -63,7 +63,8 @@
                         android:layout_marginTop="56dp"
                         android:background="@mipmap/bg_avatar">
 
-                        <ImageView
+                        <!-- 圆形图-->
+                        <com.example.tome.core.widget.CircularImageView
                             android:id="@+id/img_avatar"
                             android:layout_width="105dp"
                             android:layout_height="105dp"
@@ -74,7 +75,8 @@
                             android:layout_marginTop="0dp"
                             android:layout_marginBottom="0dp"
                             android:scaleType="fitXY"
-                            android:src="@mipmap/dft_avatar" />
+                            android:src="@mipmap/dft_avatar"
+                            />
 
                     </RelativeLayout>
 

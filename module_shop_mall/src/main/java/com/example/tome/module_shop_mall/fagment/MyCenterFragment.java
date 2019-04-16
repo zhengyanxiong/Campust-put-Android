@@ -1,6 +1,7 @@
 package com.example.tome.module_shop_mall.fagment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -14,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.bumptech.glide.Glide;
 import com.example.tome.core.base.mvp.BaseVpFragment;
 import com.example.tome.core.base.mvp.inter.IPresenter;
 import com.example.tome.core.base.mvp.inter.IView;
@@ -179,6 +181,10 @@ public class MyCenterFragment extends BaseVpFragment<MyCenterContract.View, MyCe
     public void getUserInfor(UserInfor userInfor) {
         username.setText(userInfor.getUsername());
         userEmail.setText(userInfor.getEmail());
+        Glide.with(this)
+                .load(userInfor.getHeadImag())
+                .into(userHead);
+        //userHead.setImageURI(Uri.parse(userInfor.getHeadImag()));
         mPresenter.getUserGoodsInfor(userInfor.getUserId());
         //ToastUtils.showLong(getActivity(), userInfor.toString());
     }
