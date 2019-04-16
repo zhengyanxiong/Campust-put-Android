@@ -6,51 +6,41 @@ import java.util.Date;
  * Author: created by Bernie on 2019/3/25
  **/
 public class UserInfor {
-    private Integer userId;
-
-    private Integer schoolId;
-
+    private int userId;
+    private int schoolId;
     private String studentId;
-
     private String password;
-
     private String username;
-
     private String headImag;
-
     private String phoneNum;
-
     private String sex;
-
     private String email;
-
+    private String realName;
     private String idCard;
-
     private String stuCardFront;
-
     private String stuCardBack;
-
     private Date registerDate;
-
-    private Date userCreatedTime;
-
+    private String userCreatedTime;
     private Date userUpdatedTime;
+    private int userState;
+    private int creditNum;
+    private int loveValue;
+    private int sumGrade;
+    private String schoolName;
 
-    private Integer userState;
-
-    public Integer getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
-    public Integer getSchoolId() {
+    public int getSchoolId() {
         return schoolId;
     }
 
-    public void setSchoolId(Integer schoolId) {
+    public void setSchoolId(int schoolId) {
         this.schoolId = schoolId;
     }
 
@@ -110,6 +100,14 @@ public class UserInfor {
         this.email = email;
     }
 
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
     public String getIdCard() {
         return idCard;
     }
@@ -142,11 +140,11 @@ public class UserInfor {
         this.registerDate = registerDate;
     }
 
-    public Date getUserCreatedTime() {
+    public String getUserCreatedTime() {
         return userCreatedTime;
     }
 
-    public void setUserCreatedTime(Date userCreatedTime) {
+    public void setUserCreatedTime(String userCreatedTime) {
         this.userCreatedTime = userCreatedTime;
     }
 
@@ -158,33 +156,43 @@ public class UserInfor {
         this.userUpdatedTime = userUpdatedTime;
     }
 
-    public Integer getUserState() {
+    public int getUserState() {
         return userState;
     }
 
-    public void setUserState(Integer userState) {
+    public void setUserState(int userState) {
         this.userState = userState;
     }
 
-    @Override
-    public String toString() {
-        return "UserInfor{" +
-                "userId=" + userId +
-                ", schoolId=" + schoolId +
-                ", studentId='" + studentId + '\'' +
-                ", password='" + password + '\'' +
-                ", username='" + username + '\'' +
-                ", headImag='" + headImag + '\'' +
-                ", phoneNum='" + phoneNum + '\'' +
-                ", sex='" + sex + '\'' +
-                ", email='" + email + '\'' +
-                ", idCard='" + idCard + '\'' +
-                ", stuCardFront='" + stuCardFront + '\'' +
-                ", stuCardBack='" + stuCardBack + '\'' +
-                ", registerDate=" + registerDate +
-                ", userCreatedTime=" + userCreatedTime +
-                ", userUpdatedTime=" + userUpdatedTime +
-                ", userState=" + userState +
-                '}';
+    public int getCreditNum() {
+        return creditNum;
+    }
+
+    public void setCreditNum(int creditNum) {
+        this.creditNum = creditNum;
+    }
+
+    public int getLoveValue() {
+        return loveValue;
+    }
+
+    public void setLoveValue(int loveValue) {
+        this.loveValue = loveValue;
+    }
+
+    public int getSumGrade() {
+        return sumGrade;
+    }
+
+    public void setSumGrade(int sumGrade) {
+        this.sumGrade = sumGrade;
+    }
+
+    public String getSchoolName() {
+        return schoolName;
+    }
+
+    public void setSchoolName(String schoolName) {
+        this.schoolName = schoolName;
     }
 }

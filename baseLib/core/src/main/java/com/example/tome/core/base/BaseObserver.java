@@ -85,6 +85,7 @@ public abstract class BaseObserver<T> extends ResourceObserver<T> {
 
 
         if (mDialogView != null){
+            L.d("msg--------------"+msg);
             mDialogView.showHUD(msg);
         }
 
@@ -116,7 +117,8 @@ public abstract class BaseObserver<T> extends ResourceObserver<T> {
      */
     @Override
     public void onError(Throwable e) {
-        L.d("网络异常");
+        L.d("网络异常----"+e.toString());
+        e.printStackTrace();
         if (mView == null) {
             return;
         }

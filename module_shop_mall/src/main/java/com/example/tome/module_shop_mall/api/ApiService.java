@@ -1,6 +1,7 @@
 package com.example.tome.module_shop_mall.api;
 
 import com.example.tome.module_shop_mall.bean.LoginBean;
+import com.example.tome.module_shop_mall.bean.UserAllInfor;
 import com.example.tome.module_shop_mall.bean.UserInfor;
 import com.example.tome.projectCore.bean.BaseObj;
 import com.example.tome.module_shop_mall.bean.BannerData;
@@ -12,6 +13,8 @@ import com.example.tome.module_shop_mall.bean.ProjectClassifyBean;
 import com.example.tome.module_shop_mall.bean.ProjectListBean;
 import com.example.tome.module_shop_mall.bean.TopSearchBean;
 import com.example.tome.projectCore.widget.emptyViews.LoadingView;
+
+import org.json.JSONObject;
 
 import io.reactivex.Observable;
 import java.util.List;
@@ -138,4 +141,13 @@ public interface ApiService {
      */
     @GET("/member/findByToken")
     Observable<BaseObj<UserInfor>> getUserInfor(@Query("token") String token);
+
+    /**
+     * 获得用户商品信息
+     * 192.168.43.152:8762
+     * @param userId
+     * @return
+     */
+    @GET("/member/getUserAllByUserId")
+    Observable<BaseObj<UserAllInfor>> getUserGoodsInfor(@Query("userId") Integer userId);
 }

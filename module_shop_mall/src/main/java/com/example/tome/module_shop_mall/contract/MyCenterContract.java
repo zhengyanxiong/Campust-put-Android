@@ -4,8 +4,11 @@ import com.example.tome.core.base.mvp.inter.IModel;
 import com.example.tome.core.base.mvp.inter.IPresenter;
 import com.example.tome.core.base.mvp.inter.IView;
 import com.example.tome.module_shop_mall.bean.ProjectClassifyBean;
+import com.example.tome.module_shop_mall.bean.UserAllInfor;
 import com.example.tome.module_shop_mall.bean.UserInfor;
 import com.example.tome.projectCore.bean.BaseObj;
+
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -17,6 +20,8 @@ import io.reactivex.Observable;
 public interface MyCenterContract {
     interface View extends IView{
         void getUserInfor(UserInfor userInfor);
+
+        void getUserGoodsInfor(UserAllInfor userAllInfor);
     }
 
     interface Presenter extends IPresenter<View>{
@@ -24,6 +29,10 @@ public interface MyCenterContract {
          * 获得个人中心中的数据
          */
         void getUserInfor(String token);
+        /**
+         * 获得用户商品信息
+         */
+        void getUserGoodsInfor(Integer userId);
     }
 
     interface Model extends IModel {
@@ -32,6 +41,12 @@ public interface MyCenterContract {
          * 获得个人中心中的数据
          */
         Observable<BaseObj<UserInfor>> getUserInfor(String token);
+
+        /**
+         * 获得用户商品信息
+         */
+        Observable<BaseObj<UserAllInfor>> getUserGoodsInfor(Integer userId);
+
 
     }
 }
