@@ -242,7 +242,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:id="@+id/attestation_btn">
 
                     <LinearLayout
                         android:id="@+id/lay_sign"
@@ -264,7 +265,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="17dp"
-                            android:text="实名认证" />
+                            android:text="学生认证" />
 
                         <TextView
                             style="@style/text_black"

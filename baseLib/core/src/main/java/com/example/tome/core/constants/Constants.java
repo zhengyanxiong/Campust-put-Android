@@ -29,4 +29,10 @@ public interface Constants {
 
     //用户注册
     String USER_REGISTER_LINK = BaseHost.CAMPUS_SERVER_HOST+":8000/register";
+
+    //商品分类
+    String CLASSIFY_GOODS_LINK = BaseHost.CAMPUS_SERVER_HOST+":8000/getGoodsClass";
+
+    //学生认证
+    String STUDENT_AUTHENTICATION = BaseHost.CAMPUS_SERVER_HOST+":8000/studentId";
 }

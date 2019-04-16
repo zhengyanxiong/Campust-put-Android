@@ -99,5 +99,12 @@ public class RouterCenter {
         ARouter.getInstance().build(RouterURLS.MYCENTER_SETTING).navigation();
     }
 
+    /**
+     * 跳转商品分类Activity
+     */
+    public static void toGoodsClassify(){
+        ARouter.getInstance().build(RouterURLS.GOODS_CLASSIFY).navigation();
+    }
+
 
 }

@@ -24,6 +24,7 @@ import com.example.tome.core.util.StatuBarCompat;
 import com.example.tome.core.util.UltimateBar;
 import com.example.tome.module_shop_mall.R;
 import com.example.tome.module_shop_mall.R2;
+import com.example.tome.module_shop_mall.arouter.RouterCenter;
 import com.example.tome.module_shop_mall.fagment.HomeFragment;
 import com.example.tome.module_shop_mall.fagment.KnowledgeSystemFragment;
 import com.example.tome.module_shop_mall.fagment.MyCenterFragment;
@@ -115,10 +116,10 @@ public class MainActivity extends BaseVcPermissionActivity implements View.OnCli
         int getWebHome = getIntent().getIntExtra("homeWeb",0);
         if (getMyCenter == 4) {
             addFragment(R.id.layout_pager, mFragmentList.get(3));
-            mBottomNavigationView.setSelectedItemId(mBottomNavigationView.getMenu().getItem(4).getItemId());
+            mBottomNavigationView.setSelectedItemId(mBottomNavigationView.getMenu().getItem(3).getItemId());
         } else if (getWebHome == 1){
             addFragment(R.id.layout_pager, mFragmentList.get(0));
-            mBottomNavigationView.setSelectedItemId(mBottomNavigationView.getMenu().getItem(1).getItemId());
+            mBottomNavigationView.setSelectedItemId(mBottomNavigationView.getMenu().getItem(0).getItemId());
         } else{
             addFragment(R.id.layout_pager, mFragmentList.get(0));
         }
@@ -130,9 +131,10 @@ public class MainActivity extends BaseVcPermissionActivity implements View.OnCli
                 if (item.getItemId() == R.id.tab_home) {
                     addFragment(R.id.layout_pager, mFragmentList.get(0));
                 } else if (item.getItemId() == R.id.tab_find) {
-                    addFragment(R.id.layout_pager, mFragmentList.get(1));
+                    RouterCenter.toGoodsClassify();
+                    //addFragment(R.id.layout_pager, mFragmentList.get(1));
                 } else if (item.getItemId() == R.id.tab_message) {
-                    addFragment(R.id.layout_pager, mFragmentList.get(2));
+                    addFragment(R.id.layout_pager, mFragmentList.get(1));
                 } else if (item.getItemId() == R.id.tab_self) {
                     addFragment(R.id.layout_pager, mFragmentList.get(3));
                 }

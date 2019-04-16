@@ -29,6 +29,7 @@ import com.example.tome.module_shop_mall.R;
 import com.example.tome.module_shop_mall.R2;
 import com.example.tome.module_shop_mall.activity.LoginActivity;
 import com.example.tome.module_shop_mall.activity.MyGoodsPublshActivity;
+import com.example.tome.module_shop_mall.activity.StudentAuthenticationActivity;
 import com.example.tome.module_shop_mall.activity.UserHomeActivity;
 import com.example.tome.module_shop_mall.arouter.RouterCenter;
 import com.example.tome.module_shop_mall.bean.ProjectClassifyBean;
@@ -79,6 +80,10 @@ public class MyCenterFragment extends BaseVpFragment<MyCenterContract.View, MyCe
     TextView myBuyNum;
     @BindView(R2.id.mycenter_num_collection)
     TextView myBuyCar;
+    @BindView(R2.id.tv_has_authentication)
+    TextView authenticationText;
+    @BindView(R2.id.lay_sign)
+    LinearLayout authenticationBtn;
     private static String userToken = "";
 
 
@@ -181,6 +186,18 @@ public class MyCenterFragment extends BaseVpFragment<MyCenterContract.View, MyCe
     public void getUserInfor(UserInfor userInfor) {
         username.setText(userInfor.getUsername());
         userEmail.setText(userInfor.getEmail());
+        if(userInfor.getUserState() == 1){
+            authenticationText.setText("未认证");
+            authenticationBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    startActivity(new Intent(getActivity(),StudentAuthenticationActivity.class));
+                }
+            });
+        } else {
+            authenticationText.setText("已认证");
+        }
         Glide.with(this)
                 .load(userInfor.getHeadImag())
                 .into(userHead);

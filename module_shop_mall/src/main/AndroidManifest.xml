@@ -31,6 +31,8 @@
         <activity android:name=".activity.UserInformationActivity"/>
         <activity android:name=".activity.ClipImageActivity"/>
         <activity android:name=".activity.MyGoodsPublshActivity"/>
+        <activity android:name=".activity.GoodsClassifyActivity"/>
+        <activity android:name=".activity.StudentAuthenticationActivity"/>
 
 
     </application>
