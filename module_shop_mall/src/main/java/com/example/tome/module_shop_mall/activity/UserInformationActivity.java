@@ -12,14 +12,10 @@ import com.example.tome.core.base.mvc.BaseVcActivity;
 import com.example.tome.core.constants.Constants;
 import com.example.tome.core.util.L;
 import com.example.tome.core.util.StatuBarCompat;
-import com.example.tome.core.util.StringUtils;
-import com.example.tome.core.util.ToastUtils;
-import com.example.tome.core.util.widgetUtils.WebViewInitUtils;
+import com.example.tome.module_shop_mall.widget.WebViewInitUtils;
 import com.example.tome.module_shop_mall.R;
 import com.example.tome.module_shop_mall.R2;
 import com.example.tome.module_shop_mall.widget.ActionSheetDialog;
-import com.example.tome.module_shop_mall.widget.ImageUpload;
-import com.facebook.stetho.common.StringUtil;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
@@ -67,7 +63,7 @@ public class UserInformationActivity extends BaseVcActivity {
         mImmersionBar.fitsSystemWindows(true).statusBarColor(R.color.bar_grey).init();
         StatuBarCompat.setImmersiveStatusBar(true, R.color.comment_text, this);
 
-        WebViewInitUtils.init(this, webView);
+        WebViewInitUtils.init(this, webView,null);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.addJavascriptInterface(new Js(), "appHeaderImageObj");
 

@@ -116,7 +116,7 @@ public class MainActivity extends BaseVcPermissionActivity implements View.OnCli
         int getWebHome = getIntent().getIntExtra("homeWeb",0);
         if (getMyCenter == 4) {
             addFragment(R.id.layout_pager, mFragmentList.get(3));
-            mBottomNavigationView.setSelectedItemId(mBottomNavigationView.getMenu().getItem(3).getItemId());
+            mBottomNavigationView.setSelectedItemId(mBottomNavigationView.getMenu().getItem(4).getItemId());
         } else if (getWebHome == 1){
             addFragment(R.id.layout_pager, mFragmentList.get(0));
             mBottomNavigationView.setSelectedItemId(mBottomNavigationView.getMenu().getItem(0).getItemId());

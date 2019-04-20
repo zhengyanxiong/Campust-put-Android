@@ -1,11 +1,8 @@
 package com.example.tome.module_shop_mall.fagment;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.net.Uri;
-import android.view.View;
 import android.webkit.ValueCallback;
-import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -17,8 +14,7 @@ import com.bigkoo.alertview.OnItemClickListener;
 import com.example.tome.core.base.mvp.BaseVpFragment;
 import com.example.tome.core.constants.Constants;
 import com.example.tome.core.util.StatuBarCompat;
-import com.example.tome.core.util.widgetUtils.WebViewInitUtils;
-import com.example.tome.module_shop_mall.activity.MainActivity;
+import com.example.tome.module_shop_mall.widget.WebViewInitUtils;
 import com.example.tome.module_shop_mall.base.Cookies;
 import com.example.tome.module_shop_mall.util.BasicTool;
 import com.example.tome.module_shop_mall.widget.ImageAlertDialogs;
@@ -28,10 +24,6 @@ import com.example.tome.module_shop_mall.R2;
 import com.example.tome.module_shop_mall.contract.HomeContract;
 import com.example.tome.module_shop_mall.presenter.HomePresenter;
 import com.fec.core.router.arouter.RouterURLS;
-
-import java.io.File;
-
-import static android.app.Activity.RESULT_OK;
 
 
 /**
@@ -71,7 +63,7 @@ public class HomeFragment extends BaseVpFragment<HomeContract.View, HomeContract
     protected void initView() {
         StatuBarCompat.setImmersiveStatusBarWithView(true,getActivity());
         mImmersionBar.transparentBar().init();
-        WebViewInitUtils.init(getActivity(),webView);
+        WebViewInitUtils.init(getActivity(),webView,null);
         String token = BasicTool.getMemberToken(getActivity(),Constants.MEMBER_TOCKEN,"");
         if(null == token || "".equals(token)){
             L.d("未登录，开始设置token为空.................");

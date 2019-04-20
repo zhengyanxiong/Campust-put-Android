@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
-import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -13,7 +12,7 @@ import com.bigkoo.alertview.AlertView;
 import com.bigkoo.alertview.OnItemClickListener;
 import com.example.tome.core.base.mvp.BaseVpFragment;
 import com.example.tome.core.constants.Constants;
-import com.example.tome.core.util.widgetUtils.WebViewInitUtils;
+import com.example.tome.module_shop_mall.widget.WebViewInitUtils;
 import com.example.tome.module_shop_mall.R;
 import com.example.tome.module_shop_mall.R2;
 import com.example.tome.module_shop_mall.contract.HomeContract;
@@ -50,7 +49,7 @@ public class PublishGoods extends BaseVpFragment<HomeContract.View, HomeContract
 
     @Override
     protected void initView() {
-        WebViewInitUtils.init(getActivity(),webView);
+        WebViewInitUtils.init(getActivity(),webView,null);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.addJavascriptInterface(new Js(),"appImageObj");
         webView.loadUrl(Constants.PUBLISH_GOODS_LINK);

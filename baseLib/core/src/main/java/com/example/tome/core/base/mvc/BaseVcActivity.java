@@ -1,19 +1,27 @@
 package com.example.tome.core.base.mvc;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.webkit.WebView;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import com.example.tome.core.R;
 import com.example.tome.core.base.BaseEventbusBean;
 import com.example.tome.core.base.mvp.inter.IView;
 import com.example.tome.core.constants.BaseApplication;
+import com.example.tome.core.constants.IntentKVCore;
 import com.example.tome.core.helper.HUDFactory;
+import com.example.tome.core.util.ImageUpload;
+import com.example.tome.core.util.L;
 import com.example.tome.core.util.StatuBarCompat;
 import com.example.tome.core.util.ToastUtils;
 import com.gyf.barlibrary.ImmersionBar;
@@ -31,7 +39,7 @@ import org.greenrobot.eventbus.ThreadMode;
  * @描述 ${MVC模式的Base Activity}
  */
 
-public abstract class BaseVcActivity extends AppCompatActivity implements IView {
+public abstract class BaseVcActivity extends AppCompatActivity implements IView , ImageUpload.OnImageUploadResult{
 
     private Unbinder unBinder;
     protected boolean regEvent;
@@ -42,6 +50,7 @@ public abstract class BaseVcActivity extends AppCompatActivity implements IView 
     private CompositeDisposable compositeDisposable;
     public ImmersionBar mImmersionBar;
     public IView mView = this;
+    private ImageUpload imageUpload;
 
 
     @Override
@@ -56,11 +65,18 @@ public abstract class BaseVcActivity extends AppCompatActivity implements IView 
         //setImmeriveStatuBar();
         mActivity = this ;
 
+        imageUpload = new ImageUpload(this);
+        imageUpload.setOnImageUploadResult(this);
+
         initTitle();
         initView();
         if (regEvent){
             EventBus.getDefault().register(this);
         }
+    }
+
+    public ImageUpload getImageUpload(){
+        return this.imageUpload;
     }
 
     private void initImmersionBar() {
@@ -213,6 +229,53 @@ public abstract class BaseVcActivity extends AppCompatActivity implements IView 
     protected void setImmeriveStatuBar() {
         StatuBarCompat.setImmersiveStatusBar(true, Color.WHITE, this);
 
+    }
+
+
+    public void setPlatformType(final String url, WebView webView) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Handler handler = new Handler(Looper.getMainLooper());
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        webView.loadUrl("javascript: uploadAvatarIsCompleted('" + url + "')");
+                    }
+                });
+            }
+        }).start();
+    }
+    public void setPlatformTypeWithFlag(final String url,final String flag, WebView webView) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Handler handler = new Handler(Looper.getMainLooper());
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        webView.loadUrl("javascript: uploadAvatarIsCompleted('"+flag+"','" + url + "')");
+                    }
+                });
+            }
+        }).start();
+    }
+
+
+    @Override
+    public void getImageUrl(String url) {
+        L.d("getImageUrl" + url);
+        //setPlatformType(url);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (imageUpload != null && resultCode == RESULT_OK && requestCode == IntentKVCore.FLAG_IMAGE_FROM_ALBUM) {
+            imageUpload.onActivityResult(requestCode, data);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     /**

@@ -11,7 +11,7 @@ import android.webkit.WebViewClient;
 import android.widget.TextView;
 import butterknife.BindView;
 import com.example.tome.core.base.mvc.BaseVcActivity;
-import com.example.tome.core.util.widgetUtils.WebViewInitUtils;
+import com.example.tome.module_shop_mall.widget.WebViewInitUtils;
 import com.fec.core.router.arouter.IntentKV;
 import com.example.tome.module_shop_mall.R;
 import com.example.tome.module_shop_mall.R2;
@@ -73,7 +73,7 @@ public class ArticleDetailActivity extends BaseVcActivity {
 
     @Override
     protected void initView() {
-        WebViewInitUtils.init(mActivity, mWebView);
+        WebViewInitUtils.init(mActivity, mWebView,null);
 
         mWebView.loadUrl(articleLink);
 

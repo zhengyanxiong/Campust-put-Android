@@ -1,4 +1,4 @@
-package com.example.tome.module_shop_mall.widget;
+package com.example.tome.core.util;
 
 import android.Manifest;
 import android.app.Activity;
@@ -16,10 +16,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 
 import com.example.tome.core.constants.Constants;
-import com.example.tome.core.util.L;
-import com.example.tome.core.util.PictureCompressionUtils;
-import com.example.tome.core.util.ToastUtils;
-import com.fec.core.router.arouter.IntentKV;
+import com.example.tome.core.constants.IntentKVCore;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -53,7 +50,7 @@ public class ImageUpload {
     private File outFile;
     private String mImageName;
 
-    ImageAlertDialogs.OnImageSelectResult selectListener;
+    //ImageAlertDialogs.OnImageSelectResult selectListener;
     private File currentFile;
     private Uri localUri = null;
     private Uri mPhotoUri;
@@ -67,12 +64,20 @@ public class ImageUpload {
     private File mPath;
     OnImageUploadResult imageUploadResult;
 
-    public ImageUpload(Activity activity){
+    public ImageUpload(Activity activity) {
         this.activity = activity;
+        if (ContextCompat.checkSelfPermission(activity,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(activity,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    MY_PERMISSIONS_REQUEST_CALL_PHONE2);
+            L.d(TAG, "权限控制====开启写的权限");
+        }
         initFileCache();
     }
 
-    public void setOnImageUploadResult(OnImageUploadResult uploadResult){
+    public void setOnImageUploadResult(OnImageUploadResult uploadResult) {
         this.imageUploadResult = uploadResult;
     }
 
@@ -105,7 +110,7 @@ public class ImageUpload {
     public void selectImage() {
         Intent intent = new Intent(Intent.ACTION_PICK, null);
         intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-        activity.startActivityForResult(intent, IntentKV.FLAG_IMAGE_FROM_ALBUM);
+        activity.startActivityForResult(intent, IntentKVCore.FLAG_IMAGE_FROM_ALBUM);
     }
 
     public void openCamera(Context context) {
@@ -136,7 +141,7 @@ public class ImageUpload {
             }
             intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
             intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
-            activity.startActivityForResult(intent, IntentKV.FLAG_IMAGE_FROM_CAMERA);
+            activity.startActivityForResult(intent, IntentKVCore.FLAG_IMAGE_FROM_CAMERA);
         } else {
             L.e(TAG, "请确认已经插入SD卡");
         }
@@ -147,16 +152,8 @@ public class ImageUpload {
 
     //处理返回的图片
     public void onActivityResult(int flag, Intent data) {
-        if (ContextCompat.checkSelfPermission(activity,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(activity,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    MY_PERMISSIONS_REQUEST_CALL_PHONE2);
-            L.d(TAG, "权限控制====开启写的权限");
-        }
 
-        if (flag == IntentKV.FLAG_IMAGE_FROM_ALBUM) {
+        if (flag == IntentKVCore.FLAG_IMAGE_FROM_ALBUM) {
             //相册选择
             try {
                 String realPathFromURI = getRealPathFromURI(data.getData());
@@ -178,10 +175,10 @@ public class ImageUpload {
                     final String compressImage = PictureCompressionUtils.compressImage(Uri.parse(realPathFromURI).getPath(), mPublicPhotoPath, 30);
 
                     final File compressedPic = new File(compressImage);
-                    if (compressedPic.exists()) {
-                        selectListener.getImage(new File(compressImage));
+                    if (compressedPic.exists()) { //获得图片
+                        //selectListener.getImage(new File(compressImage));
                     } else {//直接上传
-                        selectListener.getImage(new File(Uri.parse(realPathFromURI).getPath()));
+                        //selectListener.getImage(new File(Uri.parse(realPathFromURI).getPath()));
                     }
                 } else {
                     L.d(TAG, "相册压缩前的路径" + Uri.parse("file://" + realPathFromURI).getPath());
@@ -214,7 +211,7 @@ public class ImageUpload {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (flag == IntentKV.FLAG_IMAGE_FROM_CAMERA) {
+        } else if (flag == IntentKVCore.FLAG_IMAGE_FROM_CAMERA) {
 
 
             if (ContextCompat.checkSelfPermission(activity,
@@ -234,7 +231,7 @@ public class ImageUpload {
 
 
 //            /*----不带截图----*/
-            if (selectListener != null) {
+            /*if (selectListener != null) {
 //                selectListener.getImage(new File(imageUri.getPath()));
 
 
@@ -264,28 +261,28 @@ public class ImageUpload {
 
                 final File compressedPic = new File(compressImage);
                 if (compressedPic.exists()) {
-                    selectListener.getImage(new File(compressImage));
+                    //selectListener.getImage(new File(compressImage));
                 } else {//直接上传
-                    selectListener.getImage(new File(imageUri.getPath()));
+                    // selectListener.getImage(new File(imageUri.getPath()));
                 }
-            }
+            }*/
 
 
-        } else if (flag == IntentKV.FLAG_IMAGE_CUTTING) {
-            if (selectListener != null) {
-                selectListener.getImage(new File(imageUri.getPath()));
+        } else if (flag == IntentKVCore.FLAG_IMAGE_CUTTING) {
+           /* if (selectListener != null) {
+                //selectListener.getImage(new File(imageUri.getPath()));
 
 
                 L.d(TAG, "相册" + imageUri);
                 L.d(TAG, "相册" + imageUri.getPath());
                 L.d(TAG, "相册" + new File(imageUri.getPath()));
-            }
-        } else if (flag == IntentKV.FLAG_IMAGE_CUTTING2)
+            }*/
+        } else if (flag == IntentKVCore.FLAG_IMAGE_CUTTING2)
 
         {
-            if (selectListener != null) {
+           /* if (selectListener != null) {
             }
-
+*/
         }
 
     }
@@ -406,7 +403,7 @@ public class ImageUpload {
                             imageUploadResult.getImageUrl(url);
                             L.d("图片上传成功，返回图片地址：" + url);
                         } else {
-                            L.d( "图片上传失败！");
+                            L.d("图片上传失败！");
                         }
 
                     } catch (JSONException e) {

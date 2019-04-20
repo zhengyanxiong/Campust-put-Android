@@ -8,7 +8,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.tome.core.base.mvc.BaseVcActivity;
 import com.example.tome.core.constants.Constants;
 import com.example.tome.core.util.StatuBarCompat;
-import com.example.tome.core.util.widgetUtils.WebViewInitUtils;
+import com.example.tome.module_shop_mall.widget.WebViewInitUtils;
 import com.example.tome.module_shop_mall.R;
 import com.example.tome.module_shop_mall.R2;
 import com.example.tome.module_shop_mall.widget.JavaScriptUtils;
@@ -39,9 +39,9 @@ public class GoodsClassifyActivity extends BaseVcActivity {
         StatuBarCompat.setImmersiveStatusBar(true,R.color.comment_text,this);
 
 
-        WebViewInitUtils.init(this, webView);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.addJavascriptInterface(new JavaScriptUtils(this),"toMyCenterActivity");
+        WebViewInitUtils.init(this, webView,null);
+        /*webView.getSettings().setJavaScriptEnabled(true);
+        webView.addJavascriptInterface(new JavaScriptUtils(this),"toMyCenterActivity");*/
 
 
         webView.loadUrl(Constants.CLASSIFY_GOODS_LINK);

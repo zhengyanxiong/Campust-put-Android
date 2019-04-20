@@ -1,4 +1,4 @@
-package com.example.tome.core.util.widgetUtils;
+package com.example.tome.module_shop_mall.widget;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -7,6 +7,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 
+import com.example.tome.core.util.ImageUpload;
+
 /**
  * WebView初始化
  */
@@ -14,7 +16,7 @@ public class WebViewInitUtils {
 
     @SuppressWarnings("deprecation")
     @SuppressLint("SetJavaScriptEnabled")
-    public static void init(Activity content,WebView webview) {
+    public static void init(Activity content,WebView webview,ImageUpload imageUpload) {
         // 默认缓存模式
         WebSettings settings = webview.getSettings();
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);
@@ -43,6 +45,20 @@ public class WebViewInitUtils {
         settings.setJavaScriptCanOpenWindowsAutomatically(true);
 
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);
+
+        //开启Android条用JavaScript
+        webview.getSettings().setJavaScriptEnabled(true);
+
+        //注册JavaScript条用手机上传文件
+        if(null != imageUpload){
+           webview.addJavascriptInterface(new JavaScriptUtils(content,imageUpload), "appImageObj");
+        }
+
+        //注册JavaScript跳转Android页面
+        webview.addJavascriptInterface(new JavaScriptUtils(content),"toHomeActivity");
+        webview.addJavascriptInterface(new JavaScriptUtils(content),"toMyCenterActivity");
+        webview.addJavascriptInterface(new JavaScriptUtils(content),"toMySettingActivity");
+
     }
 
     public static String getHtmlData(String bodyHTML) {
