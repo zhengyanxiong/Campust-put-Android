@@ -12,7 +12,7 @@ public class GoodsList {
     private int goodClassNum;
     private String goodsNum;
     private String goodsName;
-    private int goodsPrice;
+    private float goodsPrice;
     private boolean isNegotiable;
     private Date goodsPublishTime;
     private Date goodsUpdatedTime;
@@ -67,7 +67,7 @@ public class GoodsList {
         this.goodsName = goodsName;
     }
 
-    public int getGoodsPrice() {
+    public float getGoodsPrice() {
         return goodsPrice;
     }
 

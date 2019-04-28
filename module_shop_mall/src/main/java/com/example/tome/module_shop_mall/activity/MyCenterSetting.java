@@ -17,6 +17,7 @@ import com.example.tome.core.util.ToastUtils;
 import com.example.tome.module_shop_mall.R;
 import com.example.tome.module_shop_mall.R2;
 import com.example.tome.module_shop_mall.arouter.RouterCenter;
+import com.example.tome.module_shop_mall.base.Cookies;
 import com.example.tome.module_shop_mall.fagment.MyCenterFragment;
 import com.fec.core.router.arouter.RouterURLS;
 
@@ -75,6 +76,7 @@ public class MyCenterSetting extends BaseVcActivity implements View.OnClickListe
                             Intent intent = new Intent(MyCenterSetting.this, MainActivity.class);
                             intent.putExtra("toMyCenter", 4);
                             startActivity(intent);
+                            Cookies.synCookies(getContext(),Constants.HOME_PAGE_LINK,Constants.APP_MEMBER_TOCKEN,"");
                             ToastUtils.showCenter("注销成功！");
                         }
                     })

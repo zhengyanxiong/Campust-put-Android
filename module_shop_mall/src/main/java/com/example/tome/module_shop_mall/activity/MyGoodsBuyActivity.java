@@ -7,21 +7,20 @@ import android.webkit.WebViewClient;
 import com.example.tome.core.base.mvc.BaseVcActivity;
 import com.example.tome.core.constants.Constants;
 import com.example.tome.core.util.StatuBarCompat;
-import com.example.tome.module_shop_mall.widget.WebViewInitUtils;
 import com.example.tome.module_shop_mall.R;
 import com.example.tome.module_shop_mall.R2;
-import com.example.tome.module_shop_mall.widget.JavaScriptUtils;
+import com.example.tome.module_shop_mall.widget.WebViewInitUtils;
 
 import butterknife.BindView;
 
-public class MyGoodsPublshActivity extends BaseVcActivity {
-    @BindView(R2.id.my_publish_goods_web_view)
+public class MyGoodsBuyActivity extends BaseVcActivity {
+    @BindView(R2.id.my_buy_goods_web_view)
     WebView webView;
 
 
     @Override
     protected int getLayoutId() {
-        return R.layout.mall_activity_my_publishi_goods;
+        return R.layout.mall_activity_my_buy_goods;
     }
 
     @Override
@@ -37,9 +36,9 @@ public class MyGoodsPublshActivity extends BaseVcActivity {
 
 
         WebViewInitUtils.init(this, webView,null);
+        
 
-
-        webView.loadUrl(Constants.MY_PUBLISH_GOODS_LINK);
+        webView.loadUrl(Constants.MY_BUY_GOODS_LINK);
         //点击拦截 true表示拦截, false表示不拦截
         webView.setWebViewClient(new WebViewClient() {
             @Override

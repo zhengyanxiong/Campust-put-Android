@@ -28,7 +28,9 @@ import com.example.tome.core.util.UltimateBar;
 import com.example.tome.module_shop_mall.R;
 import com.example.tome.module_shop_mall.R2;
 import com.example.tome.module_shop_mall.activity.LoginActivity;
+import com.example.tome.module_shop_mall.activity.MyGoodsBuyActivity;
 import com.example.tome.module_shop_mall.activity.MyGoodsPublshActivity;
+import com.example.tome.module_shop_mall.activity.MyGoodsSellActivity;
 import com.example.tome.module_shop_mall.activity.StudentAuthenticationActivity;
 import com.example.tome.module_shop_mall.activity.UserHomeActivity;
 import com.example.tome.module_shop_mall.arouter.RouterCenter;
@@ -84,6 +86,12 @@ public class MyCenterFragment extends BaseVpFragment<MyCenterContract.View, MyCe
     TextView authenticationText;
     @BindView(R2.id.lay_sign)
     LinearLayout authenticationBtn;
+    @BindView(R2.id.my_publish_goods_btn)
+    LinearLayout myPublishBtn;
+    @BindView(R2.id.my_sell_goods_btn)
+    LinearLayout mySellGoodsBtn;
+    @BindView(R2.id.my_buy_goods_btn)
+    LinearLayout myBuyGoodsBtn;
     private static String userToken = "";
 
 
@@ -107,11 +115,27 @@ public class MyCenterFragment extends BaseVpFragment<MyCenterContract.View, MyCe
                 startActivity(intent);
             }
         });
-        myPublish.setOnClickListener(new View.OnClickListener() {
+        myPublishBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(!userToken.isEmpty()){
                     startActivity(new Intent((AppCompatActivity) getActivity(), MyGoodsPublshActivity.class));
+                }
+            }
+        });
+        mySellGoodsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!userToken.isEmpty()){
+                    startActivity(new Intent((AppCompatActivity) getActivity(), MyGoodsSellActivity.class));
+                }
+            }
+        });
+        myBuyGoodsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!userToken.isEmpty()){
+                    startActivity(new Intent((AppCompatActivity) getActivity(), MyGoodsBuyActivity.class));
                 }
             }
         });

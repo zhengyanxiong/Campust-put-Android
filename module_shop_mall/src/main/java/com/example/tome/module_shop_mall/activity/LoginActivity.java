@@ -13,10 +13,12 @@ import android.widget.TextView;
 import com.example.tome.core.base.mvc.BaseVcActivity;
 import com.example.tome.core.base.mvp.BaseVpActivity;
 import com.example.tome.core.constants.Constants;
+import com.example.tome.core.util.L;
 import com.example.tome.core.util.SPUtil;
 import com.example.tome.core.util.StatuBarCompat;
 import com.example.tome.core.util.StringUtils;
 import com.example.tome.core.util.ToastUtils;
+import com.example.tome.module_shop_mall.base.Cookies;
 import com.example.tome.module_shop_mall.util.BasicTool;
 import com.example.tome.module_shop_mall.R;
 import com.example.tome.module_shop_mall.R2;
@@ -32,7 +34,7 @@ import butterknife.BindView;
 /**
  * Author: created by Bernie on 2019/3/22
  **/
-public class LoginActivity extends BaseVpActivity<ILoginsContract.View,ILoginsContract.Presenter> implements ILoginsContract.View {
+public class LoginActivity extends BaseVpActivity<ILoginsContract.View, ILoginsContract.Presenter> implements ILoginsContract.View {
 
     @BindView(R2.id.title_back)
     TextView mTitleBack;
@@ -80,7 +82,7 @@ public class LoginActivity extends BaseVpActivity<ILoginsContract.View,ILoginsCo
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(checkPage()){
+                if (checkPage()) {
                     LoginBean loginBean = new LoginBean();
                     loginBean.setStudentId(mEtdTel.getText().toString());
                     loginBean.setPassword(mEtdPwd.getText().toString());
@@ -105,13 +107,14 @@ public class LoginActivity extends BaseVpActivity<ILoginsContract.View,ILoginsCo
         mTvServicePhoneRemark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }
         });
     }
 
     /**
      * 校验
+     *
      * @return
      */
     private boolean checkPage() {
@@ -128,8 +131,11 @@ public class LoginActivity extends BaseVpActivity<ILoginsContract.View,ILoginsCo
     @Override
     public void loginSuccess() {
         ToastUtils.showCenter("登录成功");
-        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-        intent.putExtra("toMyCenter",4);
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        String token = BasicTool.getMemberToken(getContext(), Constants.MEMBER_TOCKEN, "");
+        Cookies.synCookies(getContext(), Constants.HOME_PAGE_LINK, Constants.APP_MEMBER_TOCKEN, token);
+
+        intent.putExtra("toMyCenter", 4);
         startActivity(intent);
     }
 

@@ -15,8 +15,13 @@ public interface Constants {
 
     //h5发布商品地址
     String PUBLISH_GOODS_LINK = BaseHost.CAMPUS_SERVER_HOST+":8000/good/publishGoodsToAdr";
-    //h5发布商品地址
+
+    //h5我发布的商品详情
     String MY_PUBLISH_GOODS_LINK = BaseHost.CAMPUS_SERVER_HOST+":8000/good/myPublishGoods";
+    //h5我卖出的商品详情
+    String MY_SELL_GOODS_LINK = BaseHost.CAMPUS_SERVER_HOST+":8000/user/sellManage";
+    //h5我买到的商品详情
+    String MY_BUY_GOODS_LINK = BaseHost.CAMPUS_SERVER_HOST+":8000/user/buyManage";
 
     //上传图片到服务器地址
     String NGINGX_UPLOAD_LINK = BaseHost.CAMPUS_SERVER_HOST+":8788/file/fileUpload";

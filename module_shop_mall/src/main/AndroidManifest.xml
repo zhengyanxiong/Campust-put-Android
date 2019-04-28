@@ -33,6 +33,8 @@
         <activity android:name=".activity.MyGoodsPublshActivity"/>
         <activity android:name=".activity.GoodsClassifyActivity"/>
         <activity android:name=".activity.StudentAuthenticationActivity"/>
+        <activity android:name=".activity.MyGoodsBuyActivity"/>
+        <activity android:name=".activity.MyGoodsSellActivity"/>
 
 
     </application>

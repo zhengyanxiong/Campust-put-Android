@@ -169,6 +169,7 @@
                     android:layout_marginBottom="16dp"
                     android:orientation="horizontal">
                     <LinearLayout
+                        android:id="@+id/my_publish_goods_btn"
                         android:layout_width="0.0dp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
@@ -186,6 +187,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/my_sell_goods_btn"
                         android:layout_width="0.0dp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
@@ -203,6 +205,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/my_buy_goods_btn"
                         android:layout_width="0.0dp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
@@ -220,6 +223,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/my_shop_car_btn"
                         android:layout_width="0.0dp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
