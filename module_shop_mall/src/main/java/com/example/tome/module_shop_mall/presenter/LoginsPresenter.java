@@ -51,19 +51,22 @@ public class LoginsPresenter extends BasePresenter<ILoginsContract.View,ILoginsC
 
     @Override
     public void login(LoginBean loginBean) {
-        /*addDisposable(ModelVcService.getRemoteData(true, mView, new ModelVcService.MethodSelect<LoginBean>() {
+        addDisposable(ModelVcService.getRemoteData(true, mView, new ModelVcService.MethodSelect<Map<String,String>>() {
             @Override
-            public Observable<BaseObj<LoginBean>> selectM(ApiService service) {
+            public Observable<BaseObj<Map<String,String>>> selectM(ApiService service) {
                 return service.login(loginBean);
             }
-        }, new INetCallback<LoginBean>() {
+        }, new INetCallback<Map<String,String>>() {
             @Override
-            public void onSuccess(LoginBean result) {
+            public void onSuccess(Map<String,String> result) {
                 L.d("登录-------", result);
+                SPUtil.put(lCurrentActivity,Constants.MEMBER_TOCKEN,result.get("token"));
+                mView.loginSuccess();
             }
-        }));*/
 
-        addDisposable(mModel.login(loginBean)
+        }));
+
+        /*addDisposable(mModel.login(loginBean)
             .subscribeWith(new BaseObserver<BaseObj<Map<String,String>>>(mView){
                 @Override
                 public void onNext(BaseObj<Map<String,String>> loginBeanBaseObj) {
@@ -76,7 +79,7 @@ public class LoginsPresenter extends BasePresenter<ILoginsContract.View,ILoginsC
                         mView.loginFailure();
                     }
                 }
-            }));
+            }));*/
     }
 
 }

@@ -61,8 +61,7 @@ public class HomeFragment extends BaseVpFragment<HomeContract.View, HomeContract
 
     @Override
     protected void initView() {
-        StatuBarCompat.setImmersiveStatusBarWithView(true,getActivity());
-        mImmersionBar.transparentBar().init();
+
         WebViewInitUtils.init(getActivity(),webView,null);
         String token = BasicTool.getMemberToken(getActivity(),Constants.MEMBER_TOCKEN,"");
         if(null == token || "".equals(token)){

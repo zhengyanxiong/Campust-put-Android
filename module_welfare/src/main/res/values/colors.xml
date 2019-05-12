@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="welfare_colorPrimary">#F49423</color>
-    <color name="welfare_colorPrimaryDark">#F49423</color>
-    <color name="welfare_colorAccent">#F49423</color>
+    <color name="welfare_colorPrimary">#a590ad</color>
+    <color name="welfare_colorPrimaryDark">#a590ad</color>
+    <color name="welfare_colorAccent">#a590ad</color>
     <color name="welfare_colorPrimaryOverlay">#cc0094ff</color>
     <color name="welfare_color_66">#666666</color>
 

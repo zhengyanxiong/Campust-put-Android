@@ -106,5 +106,12 @@ public class RouterCenter {
         ARouter.getInstance().build(RouterURLS.GOODS_CLASSIFY).navigation();
     }
 
+    /**
+     * 跳转登陆Activity
+     */
+    public static void toLogin(){
+        ARouter.getInstance().build(RouterURLS.USER_LGINT).navigation();
+    }
+
 
 }

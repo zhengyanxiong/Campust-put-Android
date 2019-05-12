@@ -35,6 +35,10 @@
         <activity android:name=".activity.StudentAuthenticationActivity"/>
         <activity android:name=".activity.MyGoodsBuyActivity"/>
         <activity android:name=".activity.MyGoodsSellActivity"/>
+        <activity android:name=".activity.OpinionActivity"/>
+        <activity android:name=".activity.RulesUserActivity"/>
+        <activity android:name=".activity.AboutActivity"/>
+        <activity android:name=".activity.MyAddressActivity"/>
 
 
     </application>

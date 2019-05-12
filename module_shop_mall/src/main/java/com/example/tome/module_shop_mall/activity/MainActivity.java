@@ -85,7 +85,8 @@ public class MainActivity extends BaseVcPermissionActivity implements View.OnCli
 
     @Override
     protected void initView() {
-        StatuBarCompat.setImmersiveStatusBar(true, Color.WHITE, this);
+       /* mImmersionBar.fitsSystemWindows(true).statusBarColor(R.color.mainColor).init();
+        StatuBarCompat.setImmersiveStatusBar(true,R.color.mainColor,this);*/
         imageAdd.setOnClickListener(this);
         selectImageDialog = new ImageAlertDialogs(this);
         //注册EventBus

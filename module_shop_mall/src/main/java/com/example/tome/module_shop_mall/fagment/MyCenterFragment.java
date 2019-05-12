@@ -31,6 +31,8 @@ import com.example.tome.module_shop_mall.activity.LoginActivity;
 import com.example.tome.module_shop_mall.activity.MyGoodsBuyActivity;
 import com.example.tome.module_shop_mall.activity.MyGoodsPublshActivity;
 import com.example.tome.module_shop_mall.activity.MyGoodsSellActivity;
+import com.example.tome.module_shop_mall.activity.OpinionActivity;
+import com.example.tome.module_shop_mall.activity.RulesUserActivity;
 import com.example.tome.module_shop_mall.activity.StudentAuthenticationActivity;
 import com.example.tome.module_shop_mall.activity.UserHomeActivity;
 import com.example.tome.module_shop_mall.arouter.RouterCenter;
@@ -92,6 +94,10 @@ public class MyCenterFragment extends BaseVpFragment<MyCenterContract.View, MyCe
     LinearLayout mySellGoodsBtn;
     @BindView(R2.id.my_buy_goods_btn)
     LinearLayout myBuyGoodsBtn;
+    @BindView(R2.id.user_feedback)
+    LinearLayout user_feedback;
+    @BindView(R2.id.campus_ruler)
+    LinearLayout campus_ruler;
     private static String userToken = "";
 
 
@@ -137,6 +143,20 @@ public class MyCenterFragment extends BaseVpFragment<MyCenterContract.View, MyCe
                 if(!userToken.isEmpty()){
                     startActivity(new Intent((AppCompatActivity) getActivity(), MyGoodsBuyActivity.class));
                 }
+            }
+        });
+        user_feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!userToken.isEmpty()){
+                    startActivity(new Intent((AppCompatActivity) getActivity(), OpinionActivity.class));
+                }
+            }
+        });
+        campus_ruler.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent((AppCompatActivity) getActivity(), RulesUserActivity.class));
             }
         });
         return this;

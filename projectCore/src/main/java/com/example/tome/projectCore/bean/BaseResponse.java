@@ -8,7 +8,7 @@ package com.example.tome.projectCore.bean;
 
 public class BaseResponse {
 
-    public static final String SUCCESS = "0";
+    public static final String SUCCESS = "200";
 
     private int code ;
     private String message ;

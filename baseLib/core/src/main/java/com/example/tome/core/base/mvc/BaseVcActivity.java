@@ -82,7 +82,8 @@ public abstract class BaseVcActivity extends AppCompatActivity implements IView 
     private void initImmersionBar() {
         mImmersionBar = ImmersionBar.with(this);
         // 所有子类都将继承这些相同的属性,暂时先不加,会导入全部状态栏都一致
-       // mImmersionBar.fitsSystemWindows(true).statusBarColor(R.color.bar_grey).init();
+        mImmersionBar.fitsSystemWindows(true).statusBarColor(R.color.mainColor).init();
+        StatuBarCompat.setImmersiveStatusBar(true,R.color.comment_text,this);
     }
 
     /**
@@ -141,7 +142,7 @@ public abstract class BaseVcActivity extends AppCompatActivity implements IView 
     @Override
     public void showError(String msg, String code) {
         String mCode ="-1";
-        if (mCode.equals(code)){
+        if (mCode.equals(code) || !"200".equals(code)){
             ToastUtils.showShort(mActivity, msg);
         }
 

@@ -94,5 +94,12 @@ public class JavaScriptUtils{
         RouterCenter.toMyCenterSetting();
     }
 
+    //跳转到登陆页面
+    @JavascriptInterface
+    public void startLoginIntent() {
+        L.d("跳转到登陆页面");
+        RouterCenter.toLogin();
+    }
+
 
 }

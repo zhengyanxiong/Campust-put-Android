@@ -10,6 +10,7 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.tome.core.base.mvc.BaseVcActivity;
 import com.example.tome.core.base.mvp.BaseVpActivity;
 import com.example.tome.core.constants.Constants;
@@ -28,12 +29,14 @@ import com.example.tome.module_shop_mall.contract.ILoginsContract;
 import com.example.tome.module_shop_mall.presenter.LoginsPresenter;
 import com.example.tome.module_shop_mall.widget.EditTextWithDel;
 import com.facebook.stetho.common.StringUtil;
+import com.fec.core.router.arouter.RouterURLS;
 
 import butterknife.BindView;
 
 /**
  * Author: created by Bernie on 2019/3/22
  **/
+@Route(path = RouterURLS.USER_LGINT)
 public class LoginActivity extends BaseVpActivity<ILoginsContract.View, ILoginsContract.Presenter> implements ILoginsContract.View {
 
     @BindView(R2.id.title_back)

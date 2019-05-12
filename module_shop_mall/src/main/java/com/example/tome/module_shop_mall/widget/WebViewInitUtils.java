@@ -58,6 +58,7 @@ public class WebViewInitUtils {
         webview.addJavascriptInterface(new JavaScriptUtils(content),"toHomeActivity");
         webview.addJavascriptInterface(new JavaScriptUtils(content),"toMyCenterActivity");
         webview.addJavascriptInterface(new JavaScriptUtils(content),"toMySettingActivity");
+        webview.addJavascriptInterface(new JavaScriptUtils(content),"toLoginActivity");
 
     }
 

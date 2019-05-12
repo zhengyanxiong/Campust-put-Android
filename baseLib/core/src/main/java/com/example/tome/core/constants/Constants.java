@@ -40,4 +40,13 @@ public interface Constants {
 
     //学生认证
     String STUDENT_AUTHENTICATION = BaseHost.CAMPUS_SERVER_HOST+":8000/studentId";
+    //收货地址
+    String USER_MYADDRESS = BaseHost.CAMPUS_SERVER_HOST+":8000/user/myAddress";
+
+    //意见反馈地址
+    String OPTION_LINK = BaseHost.CAMPUS_SERVER_HOST+":8000/opinion";
+    //用户行为规范地址
+    String USER_RULERS_LINK = BaseHost.CAMPUS_SERVER_HOST+":8000/rulesUser";
+    //关于校园拍拍地址
+    String ABOUT_LINK = BaseHost.CAMPUS_SERVER_HOST+":8000/about";
 }

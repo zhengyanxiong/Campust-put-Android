@@ -31,5 +31,6 @@ public interface RouterURLS {
     String MALL_MYCENTER = "/mall/mycenter";
     String MYCENTER_SETTING = "/mycenter/setting";
     String GOODS_CLASSIFY = "/mall/goodsclassify";
+    String USER_LGINT = "/mall/login";
 
 }
