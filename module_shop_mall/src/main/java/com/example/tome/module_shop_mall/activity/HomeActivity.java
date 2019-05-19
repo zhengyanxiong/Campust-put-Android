@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -23,7 +22,7 @@ import com.example.tome.module_shop_mall.R;
 import com.example.tome.module_shop_mall.R2;
 import com.example.tome.module_shop_mall.arouter.RouterCenter;
 import com.example.tome.module_shop_mall.fagment.HomeFragment;
-import com.example.tome.module_shop_mall.fagment.KnowledgeSystemFragment;
+import com.example.tome.module_shop_mall.fagment.IMFragment;
 import com.example.tome.module_shop_mall.fagment.NavigationV2Fragment;
 import com.example.tome.module_shop_mall.fagment.ProjectFragment;
 import com.example.tome.module_shop_mall.helper.BottomNavigationViewHelper;
@@ -94,7 +93,7 @@ public class HomeActivity extends BaseVcActivity implements NavigationView.OnNav
     private void initFragment() {
         mFragmentList = new ArrayList<>();
         mFragmentList.add(new HomeFragment());
-        mFragmentList.add(new KnowledgeSystemFragment());
+        mFragmentList.add(new IMFragment());
         mFragmentList.add(new NavigationV2Fragment());
         mFragmentList.add(new ProjectFragment());
        // mFragmentList.add(BaseHomeFragment.newInstance("我的"));

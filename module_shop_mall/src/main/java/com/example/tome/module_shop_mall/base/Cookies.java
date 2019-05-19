@@ -24,8 +24,19 @@ public class Cookies {
         CookieSyncManager.createInstance(context);
         CookieManager cookieManager = CookieManager.getInstance();
         cookieManager.setAcceptCookie(true);
-        cookieManager.removeSessionCookie();//移除
         cookieManager.setCookie(url, String.format("%s=%s", key, value));
+        CookieSyncManager.getInstance().sync();
+    }
+
+    /**
+     * 移除cookie
+     * @param context
+     */
+    public static void removeCookies(Context context){
+        CookieSyncManager.createInstance(context);
+        CookieManager cookieManager = CookieManager.getInstance();
+        cookieManager.setAcceptCookie(true);
+        cookieManager.removeSessionCookie();//移除
         CookieSyncManager.getInstance().sync();
     }
 

@@ -89,7 +89,7 @@ public class MyCenterSetting extends BaseVcActivity implements View.OnClickListe
                             Intent intent = new Intent(MyCenterSetting.this, MainActivity.class);
                             intent.putExtra("toMyCenter", 4);
                             startActivity(intent);
-                            Cookies.synCookies(getContext(),Constants.HOME_PAGE_LINK,Constants.APP_MEMBER_TOCKEN,"");
+                            Cookies.removeCookies(getContext());
                             ToastUtils.showCenter("注销成功！");
                         }
                     })

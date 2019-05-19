@@ -79,6 +79,17 @@ public class BasicTool {
         String memberToken = (String)SPUtil.get(context,key,object);
         return memberToken;
     }
+    /**
+     * 从本地查找用户token
+     * @param context
+     * @param key
+     * @param object
+     * @return
+     */
+    public static String getAuthorization(Context context,String key,Object object){
+        String memberToken = (String)SPUtil.get(context,key,object);
+        return memberToken;
+    }
 
     /**
      * 检测字符串是否为空，

@@ -61,6 +61,7 @@ public class LoginsPresenter extends BasePresenter<ILoginsContract.View,ILoginsC
             public void onSuccess(Map<String,String> result) {
                 L.d("登录-------", result);
                 SPUtil.put(lCurrentActivity,Constants.MEMBER_TOCKEN,result.get("token"));
+                SPUtil.put(lCurrentActivity,Constants.MEMBER_AUTHORIZATION,result.get("Authorization"));
                 mView.loginSuccess();
             }
 

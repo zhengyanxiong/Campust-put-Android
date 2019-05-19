@@ -20,6 +20,7 @@ public class WebViewInitUtils {
         // 默认缓存模式
         WebSettings settings = webview.getSettings();
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);
+        settings.setMediaPlaybackRequiresUserGesture(true);
         // 设置支持javaScript
         settings.setJavaScriptEnabled(true);
         settings.setJavaScriptCanOpenWindowsAutomatically(true);

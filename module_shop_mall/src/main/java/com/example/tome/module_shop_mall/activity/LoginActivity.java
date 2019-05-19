@@ -136,7 +136,11 @@ public class LoginActivity extends BaseVpActivity<ILoginsContract.View, ILoginsC
         ToastUtils.showCenter("登录成功");
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         String token = BasicTool.getMemberToken(getContext(), Constants.MEMBER_TOCKEN, "");
+        String authorization = BasicTool.getMemberToken(getContext(), Constants.MEMBER_AUTHORIZATION, "");
         Cookies.synCookies(getContext(), Constants.HOME_PAGE_LINK, Constants.APP_MEMBER_TOCKEN, token);
+
+        Cookies.synCookies(getContext(), Constants.IM_PAGE_LINK, Constants.APP_MEMBER_TOCKEN, token);
+        Cookies.synCookies(getContext(), Constants.IM_PAGE_LINK, Constants.MEMBER_AUTHORIZATION, authorization);
 
         intent.putExtra("toMyCenter", 4);
         startActivity(intent);

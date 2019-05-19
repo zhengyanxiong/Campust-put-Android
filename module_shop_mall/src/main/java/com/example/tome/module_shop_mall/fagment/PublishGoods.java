@@ -51,7 +51,7 @@ public class PublishGoods extends BaseVpFragment<HomeContract.View, HomeContract
     protected void initView() {
         WebViewInitUtils.init(getActivity(),webView,null);
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.addJavascriptInterface(new Js(),"appImageObj");
+        //webView.addJavascriptInterface(new Js(),"appImageObj");
         webView.loadUrl(Constants.PUBLISH_GOODS_LINK);
         //点击拦截 true表示拦截, false表示不拦截
         webView.setWebViewClient(new WebViewClient(){
@@ -110,7 +110,7 @@ public class PublishGoods extends BaseVpFragment<HomeContract.View, HomeContract
 
     class Js{
         @JavascriptInterface
-        public void showImageDialog(){
+        public void showImageDialog(String flag){
             selectImageDialog.show();
         }
     }

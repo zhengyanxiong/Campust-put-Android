@@ -6,6 +6,7 @@ import android.webkit.WebViewClient;
 
 import com.example.tome.core.base.mvc.BaseVcActivity;
 import com.example.tome.core.constants.Constants;
+import com.example.tome.core.util.ImageUpload;
 import com.example.tome.core.util.StatuBarCompat;
 import com.example.tome.module_shop_mall.widget.WebViewInitUtils;
 import com.example.tome.module_shop_mall.R;
@@ -17,7 +18,7 @@ import butterknife.BindView;
 public class MyGoodsPublshActivity extends BaseVcActivity {
     @BindView(R2.id.my_publish_goods_web_view)
     WebView webView;
-
+    private ImageUpload imageUpload;
 
     @Override
     protected int getLayoutId() {
@@ -35,8 +36,9 @@ public class MyGoodsPublshActivity extends BaseVcActivity {
         mImmersionBar.fitsSystemWindows(true).statusBarColor(R.color.bar_grey).init();
         StatuBarCompat.setImmersiveStatusBar(true,R.color.comment_text,this);
 
+        imageUpload = super.getImageUpload();
 
-        WebViewInitUtils.init(this, webView,null);
+        WebViewInitUtils.init(this, webView,imageUpload);
 
 
         webView.loadUrl(Constants.MY_PUBLISH_GOODS_LINK);

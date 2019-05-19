@@ -2,17 +2,12 @@ package com.example.tome.module_shop_mall.activity;
 
 
 import android.content.Intent;
-import android.graphics.Color;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -20,21 +15,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.example.tome.core.util.StatuBarCompat;
-import com.example.tome.core.util.UltimateBar;
+import com.example.tome.core.base.BaseEventbusBean;
+import com.example.tome.core.util.L;
 import com.example.tome.module_shop_mall.R;
 import com.example.tome.module_shop_mall.R2;
 import com.example.tome.module_shop_mall.arouter.RouterCenter;
 import com.example.tome.module_shop_mall.fagment.HomeFragment;
-import com.example.tome.module_shop_mall.fagment.KnowledgeSystemFragment;
+import com.example.tome.module_shop_mall.fagment.IMFragment;
 import com.example.tome.module_shop_mall.fagment.MyCenterFragment;
 import com.example.tome.module_shop_mall.fagment.NavigationV2Fragment;
-import com.example.tome.module_shop_mall.fagment.ProjectFragment;
 import com.example.tome.module_shop_mall.helper.BottomNavigationViewHelper;
 import com.example.tome.module_shop_mall.widget.ImageAlertDialogs;
 import com.example.tome.projectCore.base.mvc.BaseVcPermissionActivity;
 
 import com.fec.core.router.arouter.RouterURLS;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +59,7 @@ public class MainActivity extends BaseVcPermissionActivity implements View.OnCli
     private TextView mMUsTv;
     private List<Fragment> mFragmentList;
     private Fragment mCurrentFragment;
+    private IMFragment imFragment;
     private ImageAlertDialogs selectImageDialog;
 
     @Override
@@ -100,8 +97,9 @@ public class MainActivity extends BaseVcPermissionActivity implements View.OnCli
 
     private void initFragment() {
         mFragmentList = new ArrayList<>();
+        imFragment = new IMFragment();
         mFragmentList.add(new HomeFragment(selectImageDialog));
-        mFragmentList.add(new KnowledgeSystemFragment());
+        mFragmentList.add(imFragment);
         mFragmentList.add(new NavigationV2Fragment());
         mFragmentList.add(new MyCenterFragment());
         // mFragmentList.add(BaseHomeFragment.newInstance("我的"));
@@ -173,9 +171,9 @@ public class MainActivity extends BaseVcPermissionActivity implements View.OnCli
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (selectImageDialog != null && resultCode == RESULT_OK) {
-            selectImageDialog.onActivityResult(requestCode, data);
-        }
+    public void getImageUrl(String url) {
+        L.d("getImageUrl" + url);
+       imFragment.sendImageUrl(url);
     }
+
 }

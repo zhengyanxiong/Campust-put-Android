@@ -68,6 +68,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             //配置签名文件
             signingConfig signingConfigs.release
+            aaptOptions.cruncherEnabled = false
+            aaptOptions.useNewCruncher = false
             //配置apk路径
 //            applicationVariants.all { variant ->
 //                def buildType = variant.buildType.name
