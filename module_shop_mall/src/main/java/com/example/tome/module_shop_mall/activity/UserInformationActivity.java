@@ -10,8 +10,10 @@ import android.webkit.WebViewClient;
 
 import com.example.tome.core.base.mvc.BaseVcActivity;
 import com.example.tome.core.constants.Constants;
+import com.example.tome.core.util.ImageUpload;
 import com.example.tome.core.util.L;
 import com.example.tome.core.util.StatuBarCompat;
+import com.example.tome.module_shop_mall.widget.JavaScriptUtils;
 import com.example.tome.module_shop_mall.widget.WebViewInitUtils;
 import com.example.tome.module_shop_mall.R;
 import com.example.tome.module_shop_mall.R2;
@@ -46,6 +48,7 @@ public class UserInformationActivity extends BaseVcActivity {
     private final static int Pic_OK = 20000;
     private final static int CLIP = 30000;
 
+    private ImageUpload imageUpload;
 
     @Override
     protected int getLayoutId() {
@@ -60,10 +63,11 @@ public class UserInformationActivity extends BaseVcActivity {
     @Override
     public void initView() {
 
+        imageUpload = super.getImageUpload();
         mImmersionBar.fitsSystemWindows(true).statusBarColor(R.color.bar_grey).init();
         StatuBarCompat.setImmersiveStatusBar(true, R.color.comment_text, this);
 
-        WebViewInitUtils.init(this, webView,null);
+        WebViewInitUtils.init(this, webView,imageUpload);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.addJavascriptInterface(new Js(), "appHeaderImageObj");
 
@@ -83,6 +87,12 @@ public class UserInformationActivity extends BaseVcActivity {
             }
         });
 
+    }
+
+    @Override
+    public void getImageUrl(String url) {
+        L.d("getImageUrl" + url);
+        super.setPlatformTypeWithFlag(url,JavaScriptUtils.flag,webView);
     }
 
 
