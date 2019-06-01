@@ -14,7 +14,7 @@ public class BaseHost {
     public static final String SINA_PHOTO_HOST = "http://gank.io/api/";
 
 
-    public static final String CAMPUS_SERVER_HOST = "http://192.168.1.6";
+    public static final String CAMPUS_SERVER_HOST = "http://192.168.1.4";
 
 
     /**

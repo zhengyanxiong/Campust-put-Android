@@ -2,14 +2,18 @@ package com.example.tome.module_shop_mall.widget;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.webkit.JavascriptInterface;
 
 import com.example.tome.core.util.ImageUpload;
 import com.example.tome.core.util.L;
 import com.example.tome.core.util.StringUtils;
+import com.example.tome.module_shop_mall.R;
 import com.example.tome.module_shop_mall.activity.MainActivity;
 import com.example.tome.module_shop_mall.arouter.RouterCenter;
 import com.example.tome.module_shop_mall.util.BasicTool;
+import com.example.tome.module_shop_mall.util.NotificationUtils;
+import com.example.tome.module_shop_mall.util.TitleTextWindow;
 import com.facebook.stetho.common.StringUtil;
 
 public class JavaScriptUtils{
@@ -100,6 +104,20 @@ public class JavaScriptUtils{
     public void startLoginIntent() {
         L.d("跳转到登陆页面");
         RouterCenter.toLogin();
+    }
+
+    //发送消息提示
+    @JavascriptInterface
+    public void sendNotification1(String activeTitle,String activeContent,String activeImage, String activeCreatTime) {
+        NotificationUtils notificationUtils = new NotificationUtils(activity);
+        notificationUtils
+                .setOngoing(false)
+                .setTicker("来通知消息啦")
+                .setSound(Uri.parse("android.resource://com.example.tome.module_shop_mall.widget/" + R.raw.ringl))
+                .sendNotification(1,activeTitle, "六一儿童大促销", R.mipmap.ic_launcher);
+
+        TitleTextWindow textWindow=new TitleTextWindow(activity);
+        textWindow.show(activeTitle,activeContent,activeImage,activeCreatTime);
     }
 
 

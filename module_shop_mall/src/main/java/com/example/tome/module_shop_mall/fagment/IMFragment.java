@@ -46,6 +46,13 @@ public class IMFragment extends BaseVcFragment{
         imageUpload = new ImageUpload(getActivity());
 
         WebViewInitUtils.init(getActivity(),webView,imageUpload);
+        webView.getSettings().setDomStorageEnabled(true);
+        webView.getSettings().setAppCacheMaxSize(1024*1024*8);
+        String appCachePath = getActivity().getCacheDir().getAbsolutePath();
+        webView.getSettings().setAppCachePath(appCachePath);
+        webView.getSettings().setAllowFileAccess(true);
+        webView.getSettings().setAppCacheEnabled(true);
+
         webView.loadUrl(Constants.IM_PAGE_LINK);
 
 

@@ -115,7 +115,6 @@ dependencies {
     if (!rootProject.ext.isModule) {
         implementation project(':module_shop_mall')
         implementation project(':module_shop_cart')
-        implementation project(':module_welfare')
         implementation project(':module_common_ui')
     }
 }

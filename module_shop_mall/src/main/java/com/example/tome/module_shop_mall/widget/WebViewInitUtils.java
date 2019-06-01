@@ -47,8 +47,10 @@ public class WebViewInitUtils {
 
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);
 
+
         //开启Android条用JavaScript
         webview.getSettings().setJavaScriptEnabled(true);
+
 
         //注册JavaScript条用手机上传文件
         if(null != imageUpload){
@@ -60,6 +62,9 @@ public class WebViewInitUtils {
         webview.addJavascriptInterface(new JavaScriptUtils(content),"toMyCenterActivity");
         webview.addJavascriptInterface(new JavaScriptUtils(content),"toMySettingActivity");
         webview.addJavascriptInterface(new JavaScriptUtils(content),"toLoginActivity");
+
+        //注册JavaScript调用Android发送消息通知
+        webview.addJavascriptInterface(new JavaScriptUtils(content),"sendNotification1Obj");
 
     }
 
