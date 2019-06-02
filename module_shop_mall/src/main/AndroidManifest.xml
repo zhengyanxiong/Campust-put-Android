@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.tome.module_shop_mall">
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:supportsRtl="true"
@@ -16,32 +22,36 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.HomeActivity" />
         <activity android:name=".activity.ArticleDetailActivity" />
         <activity android:name=".activity.KnowledgeDetailActivity" />
         <activity android:name=".activity.MvcTestActivity" />
-        <activity android:name=".activity.MvpTestActivity"></activity>
-        <activity android:name=".activity.MvpNoModelTestActivity"></activity>
-        <activity android:name=".activity.LoginActivity"/>
-        <activity android:name=".activity.MyCenterSetting"/>
-        <activity android:name=".activity.PublishiGoodsActivity"/>
-        <activity android:name=".activity.UserHomeActivity"/>
-        <activity android:name=".activity.RegisterActivity"/>
-        <activity android:name=".activity.UserInformationActivity"/>
-        <activity android:name=".activity.ClipImageActivity"/>
-        <activity android:name=".activity.MyGoodsPublshActivity"/>
-        <activity android:name=".activity.GoodsClassifyActivity"/>
-        <activity android:name=".activity.StudentAuthenticationActivity"/>
-        <activity android:name=".activity.MyGoodsBuyActivity"/>
-        <activity android:name=".activity.MyGoodsSellActivity"/>
-        <activity android:name=".activity.OpinionActivity"/>
-        <activity android:name=".activity.RulesUserActivity"/>
-        <activity android:name=".activity.AboutActivity"/>
-        <activity android:name=".activity.MyAddressActivity"/>
+        <activity android:name=".activity.MvpTestActivity" />
+        <activity android:name=".activity.MvpNoModelTestActivity" />
+        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.MyCenterSetting" />
+        <activity android:name=".activity.PublishiGoodsActivity" />
+        <activity android:name=".activity.UserHomeActivity" />
+        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.UserInformationActivity" />
+        <activity android:name=".activity.ClipImageActivity" />
+        <activity android:name=".activity.MyGoodsPublshActivity" />
+        <activity android:name=".activity.GoodsClassifyActivity" />
+        <activity android:name=".activity.StudentAuthenticationActivity" />
+        <activity android:name=".activity.MyGoodsBuyActivity" />
+        <activity android:name=".activity.MyGoodsSellActivity" />
+        <activity android:name=".activity.OpinionActivity" />
+        <activity android:name=".activity.RulesUserActivity" />
+        <activity android:name=".activity.AboutActivity" />
+        <activity android:name=".activity.MyAddressActivity" />
 
+        <service android:name="org.eclipse.paho.android.service.MqttService" />
 
+        <service
+            android:name=".mqtt.MQTTService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

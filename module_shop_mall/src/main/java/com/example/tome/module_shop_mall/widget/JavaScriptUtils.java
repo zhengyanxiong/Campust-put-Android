@@ -108,16 +108,16 @@ public class JavaScriptUtils{
 
     //发送消息提示
     @JavascriptInterface
-    public void sendNotification1(String activeTitle,String activeContent,String activeImage, String activeCreatTime) {
+    public void sendNotification1(String activeTitle,String activeContent,String activeImage, String activeCreatTime,String titleID) {
         NotificationUtils notificationUtils = new NotificationUtils(activity);
         notificationUtils
                 .setOngoing(false)
                 .setTicker("来通知消息啦")
                 .setSound(Uri.parse("android.resource://com.example.tome.module_shop_mall.widget/" + R.raw.ringl))
-                .sendNotification(1,activeTitle, "六一儿童大促销", R.mipmap.ic_launcher);
+                .sendNotification(1,activeTitle, activeContent, R.mipmap.ic_launcher);
 
         TitleTextWindow textWindow=new TitleTextWindow(activity);
-        textWindow.show(activeTitle,activeContent,activeImage,activeCreatTime);
+        textWindow.show(activeTitle,activeContent,activeImage,activeCreatTime,titleID);
     }
 
 

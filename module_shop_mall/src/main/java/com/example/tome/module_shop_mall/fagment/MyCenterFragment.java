@@ -1,5 +1,6 @@
 package com.example.tome.module_shop_mall.fagment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,7 @@ import com.example.tome.core.base.mvp.BaseVpFragment;
 import com.example.tome.core.base.mvp.inter.IPresenter;
 import com.example.tome.core.base.mvp.inter.IView;
 import com.example.tome.core.constants.Constants;
+import com.example.tome.core.util.JsonUtil;
 import com.example.tome.core.util.L;
 import com.example.tome.core.util.SPUtil;
 import com.example.tome.core.util.StatuBarCompat;
@@ -28,6 +30,7 @@ import com.example.tome.core.util.UltimateBar;
 import com.example.tome.module_shop_mall.R;
 import com.example.tome.module_shop_mall.R2;
 import com.example.tome.module_shop_mall.activity.LoginActivity;
+import com.example.tome.module_shop_mall.activity.MainActivity;
 import com.example.tome.module_shop_mall.activity.MyGoodsBuyActivity;
 import com.example.tome.module_shop_mall.activity.MyGoodsPublshActivity;
 import com.example.tome.module_shop_mall.activity.MyGoodsSellActivity;
@@ -36,18 +39,29 @@ import com.example.tome.module_shop_mall.activity.RulesUserActivity;
 import com.example.tome.module_shop_mall.activity.StudentAuthenticationActivity;
 import com.example.tome.module_shop_mall.activity.UserHomeActivity;
 import com.example.tome.module_shop_mall.arouter.RouterCenter;
+import com.example.tome.module_shop_mall.bean.NoticeMessage;
 import com.example.tome.module_shop_mall.bean.ProjectClassifyBean;
 import com.example.tome.module_shop_mall.bean.UserAllInfor;
 import com.example.tome.module_shop_mall.bean.UserInfor;
 import com.example.tome.module_shop_mall.contract.IProjectContract;
 import com.example.tome.module_shop_mall.contract.MyCenterContract;
+import com.example.tome.module_shop_mall.mqtt.IGetMessageCallBack;
+import com.example.tome.module_shop_mall.mqtt.MQTTService;
+import com.example.tome.module_shop_mall.mqtt.MqttPushClient;
+import com.example.tome.module_shop_mall.mqtt.MyServiceConnection;
+import com.example.tome.module_shop_mall.mqtt.PushCallback;
 import com.example.tome.module_shop_mall.presenter.MyCenterPresenter;
+import com.example.tome.module_shop_mall.widget.JavaScriptUtils;
 import com.fec.core.router.arouter.RouterURLS;
+import com.google.gson.Gson;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import butterknife.BindView;
 import retrofit2.http.Path;
@@ -56,7 +70,7 @@ import retrofit2.http.Path;
  * Author: created by Bernie on 2019/3/12
  **/
 @Route(path = RouterURLS.MALL_MYCENTER)
-public class MyCenterFragment extends BaseVpFragment<MyCenterContract.View, MyCenterContract.Presenter> implements MyCenterContract.View {
+public class MyCenterFragment extends BaseVpFragment<MyCenterContract.View, MyCenterContract.Presenter> implements MyCenterContract.View,IGetMessageCallBack {
 
     /*@BindView(R2.id.title_my_center_text)
     TextView mTitleContentText;
@@ -100,6 +114,11 @@ public class MyCenterFragment extends BaseVpFragment<MyCenterContract.View, MyCe
     LinearLayout campus_ruler;
     private static String userToken = "";
 
+    private PushCallback pushCallback;
+
+    private MyServiceConnection serviceConnection;
+    private MQTTService mqttService;
+
 
     @Override
     public MyCenterContract.Presenter createPresenter() {
@@ -112,6 +131,8 @@ public class MyCenterFragment extends BaseVpFragment<MyCenterContract.View, MyCe
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("");
         setHasOptionsMenu(true);
 
+        pushCallback = new PushCallback();
+        /*pushCallback.setGetMqttMessage(this);*/
 
         mImmersionBar.fitsSystemWindows(true).statusBarColor("#F4942300").init();
         startButton.setOnClickListener(new View.OnClickListener() {
@@ -228,6 +249,7 @@ public class MyCenterFragment extends BaseVpFragment<MyCenterContract.View, MyCe
 
     @Override
     public void getUserInfor(UserInfor userInfor) {
+        initMqtt(userInfor.getUserId());
         username.setText(userInfor.getUsername());
         userEmail.setText(userInfor.getEmail());
         if(userInfor.getUserState() == 1){
@@ -250,6 +272,7 @@ public class MyCenterFragment extends BaseVpFragment<MyCenterContract.View, MyCe
         //ToastUtils.showLong(getActivity(), userInfor.toString());
     }
 
+
     @Override
     public void getUserGoodsInfor(UserAllInfor jsonObject) {
 
@@ -258,5 +281,43 @@ public class MyCenterFragment extends BaseVpFragment<MyCenterContract.View, MyCe
         mySellNum.setText(jsonObject.getUserSellCount()+"");
         myBuyNum.setText(jsonObject.getUserBuyCount()+"");
 
+    }
+
+    /**
+     * 初始化Mqtt连接
+     */
+    public void initMqtt(int id){
+
+        MQTTService.myTopic = "MESSAGE"+ id;
+        MQTTService.clientId = "AndroidClient"+id;
+        L.d("#######################mqtt开始连接");
+
+        serviceConnection = new MyServiceConnection();
+        serviceConnection.setIGetMessageCallBack(this);
+
+        Intent intent = new Intent(getContext(), MQTTService.class);
+
+        getContext().bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
+
+
+        /*MqttPushClient.getInstance(mqClientId).subscribe(kdTopic);
+        MqttPushClient.getInstance(mqClientId).subscribe(kdTopic1);*/
+    }
+
+    @Override
+    public void setMessage(String message) {
+        L.d("Mqtt接收到的消息内容："+message);
+        Gson gson = new Gson();
+        NoticeMessage noticeMessage = gson.fromJson(message,NoticeMessage.class);
+
+        new JavaScriptUtils(getActivity()).sendNotification1(noticeMessage.getTitle(),
+                noticeMessage.getContent(),"",noticeMessage.getActiveCreatTime(),
+                noticeMessage.getTxno());
+    }
+
+    public  String get4UUID(){
+        UUID id=UUID.randomUUID();
+        String[] idd=id.toString().split("-");
+        return idd[1];
     }
 }

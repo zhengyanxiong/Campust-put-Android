@@ -123,6 +123,12 @@ public class MainActivity extends BaseVcPermissionActivity implements View.OnCli
             addFragment(R.id.layout_pager, mFragmentList.get(0));
         }
 
+        Integer fromUserID = getIntent().getIntExtra("fromUserID",-1);
+        if (fromUserID != -1){
+            addFragment(R.id.layout_pager,mFragmentList.get(1));
+            mBottomNavigationView.setSelectedItemId(mBottomNavigationView.getMenu().getItem(3).getItemId());
+        }
+
         mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

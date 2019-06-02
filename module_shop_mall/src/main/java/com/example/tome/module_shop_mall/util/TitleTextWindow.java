@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Looper;
@@ -21,6 +22,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.target.Target;
 import com.example.tome.module_shop_mall.R;
+import com.example.tome.module_shop_mall.activity.MainActivity;
+import com.example.tome.module_shop_mall.activity.MyCenterSetting;
+import com.example.tome.module_shop_mall.fagment.IMFragment;
 
 import static android.support.test.internal.runner.junit4.statement.UiThreadStatement.runOnUiThread;
 import static com.tencent.bugly.Bugly.applicationContext;
@@ -29,7 +33,7 @@ import static com.tencent.bugly.Bugly.applicationContext;
  * @Created by Bernie
  * @Date 2019/6/1 16:26
  **/
-public class TitleTextWindow implements View.OnTouchListener {
+public class TitleTextWindow implements View.OnTouchListener ,View.OnClickListener{
     private Context mContext;
     private WindowManager wm;
     private LinearLayout linearLayout;
@@ -107,8 +111,8 @@ public class TitleTextWindow implements View.OnTouchListener {
     /**
      * 向外部暴露显示的方法
      */
-    public void show(String title,String content,String activeImage,String time){
-        createTitleView(title,content,activeImage,time);
+    public void show(String title,String content,String activeImage,String time,String titleID){
+        createTitleView(title,content,activeImage,time,titleID);
         animShow();
         //3S后自动关闭
         mHander.sendEmptyMessageDelayed(20, 3000);
@@ -124,10 +128,11 @@ public class TitleTextWindow implements View.OnTouchListener {
     private TextView titleContent;
     private TextView titleTime;
     private ImageView titleImage;
+    private TextView titleID;
     /**
      * 视图创建方法
      */
-    private void createTitleView(String title,String content,String activeImage,String time){
+    private void createTitleView(String title,String content,String activeImage,String time,String titleId){
         //准备Window要添加的View
         linearLayout = new LinearLayout(mContext);
         final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -137,14 +142,17 @@ public class TitleTextWindow implements View.OnTouchListener {
         titleText = titleView.findViewById(R.id.tv_custom_title);
         titleContent = titleView.findViewById(R.id.tv_custom_content);
         titleTime = titleView.findViewById(R.id.tv_custom_time);
+        titleID = titleView.findViewById(R.id.tv_custom_id);
         titleImage = titleView.findViewById(R.id.custom_icon);
         titleText.setText(title);
         titleContent.setText(content);
         titleTime.setText(time);
+        titleID.setText(titleId);
 
 
-        // 为titleView设置Touch事件
-        linearLayout.setOnTouchListener(this);
+        // 为titleView设置Touch,click事件
+        //linearLayout.setOnTouchListener(this);
+        linearLayout.setOnClickListener(this);
         linearLayout.addView(titleView);
         // 定义WindowManager 并且将View添加到WindowManagar中去
         wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
@@ -194,5 +202,13 @@ public class TitleTextWindow implements View.OnTouchListener {
                 break;
         }
         return true;
+    }
+
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent(mContext,MainActivity.class);
+        intent.putExtra("fromUserID",Integer.parseInt(titleID.getText().toString()));
+        mContext.startActivity(intent);
+        Log.d("TAG","点击了弹出框,发送方ID是+"+titleID.getText());
     }
 }
