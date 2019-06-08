@@ -75,8 +75,7 @@
                             android:layout_marginTop="0dp"
                             android:layout_marginBottom="0dp"
                             android:scaleType="fitXY"
-                            android:src="@mipmap/dft_avatar3"
-                            />
+                            android:src="@mipmap/dft_avatar3" />
 
                     </RelativeLayout>
 
@@ -90,7 +89,7 @@
                         android:layout_marginRight="120dp"
                         android:padding="0dp"
                         android:text="立即登录"
-                        android:visibility="gone"/>
+                        android:visibility="gone" />
                     <!--个人信息展示内容布局-->
                     <RelativeLayout
                         android:id="@+id/showUserInfor"
@@ -98,7 +97,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignTop="@id/title_user_img"
                         android:layout_marginLeft="16dp"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="6dp"
                         android:layout_toRightOf="@id/title_user_img"
                         android:visibility="visible">
 
@@ -106,21 +105,35 @@
                             android:id="@+id/tv_name"
                             style="@style/text_white"
                             android:layout_gravity="center_horizontal"
+                            android:background="#6b042236"
                             android:text="@string/user_auther"
-                            android:background="#6b569bc9"
-                            android:textStyle="bold"
-                            android:textSize="15sp" />
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tv_email"
                             style="@style/text_white"
                             android:layout_below="@id/tv_name"
-                            android:layout_marginTop="10dp"
-                            android:background="#6b569bc9"
                             android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="6dp"
+                            android:background="#6b042236"
                             android:text="@string/user_email"
                             android:textSize="12sp" />
+
+
+                        <TextView
+                            android:id="@+id/tv_signature"
+                            style="@style/text_white"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:layout_below="@+id/tv_email"
+                            android:background="#6b042236"
+                            android:textSize="14sp"
+                            android:text="@string/user_signature" />
+
                     </RelativeLayout>
+
 
                 </RelativeLayout>
 
@@ -154,8 +167,6 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -164,91 +175,100 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
                     android:layout_marginBottom="16dp"
-                    android:orientation="horizontal">
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp">
+
                     <LinearLayout
                         android:id="@+id/my_publish_goods_btn"
                         android:layout_width="0.0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
+                        android:layout_weight="1"
                         android:gravity="center_horizontal"
-                        android:layout_weight="1">
+                        android:orientation="vertical">
+
                         <TextView
                             android:id="@+id/mycenter_num_publish"
                             style="@style/text_black"
                             android:text="0"
-                            android:textStyle="bold"
-                            android:textSize="25sp"/>
+                            android:textSize="25sp"
+                            android:textStyle="bold" />
+
                         <TextView
                             style="@style/text_black"
-                            android:text="@string/user_num_publish"/>
+                            android:text="@string/user_num_publish" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/my_sell_goods_btn"
                         android:layout_width="0.0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
+                        android:layout_weight="1"
                         android:gravity="center_horizontal"
-                        android:layout_weight="1">
+                        android:orientation="vertical">
+
                         <TextView
                             android:id="@+id/mycenter_num_sell"
                             style="@style/text_black"
                             android:text="0"
-                            android:textStyle="bold"
-                            android:textSize="25sp"/>
+                            android:textSize="25sp"
+                            android:textStyle="bold" />
+
                         <TextView
                             style="@style/text_black"
-                            android:text="@string/user_num_sell"/>
+                            android:text="@string/user_num_sell" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/my_buy_goods_btn"
                         android:layout_width="0.0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
+                        android:layout_weight="1"
                         android:gravity="center_horizontal"
-                        android:layout_weight="1">
+                        android:orientation="vertical">
+
                         <TextView
                             android:id="@+id/mycenter_num_buy"
                             style="@style/text_black"
                             android:text="0"
-                            android:textStyle="bold"
-                            android:textSize="25sp"/>
+                            android:textSize="25sp"
+                            android:textStyle="bold" />
+
                         <TextView
                             style="@style/text_black"
-                            android:text="@string/user_num_buy"/>
+                            android:text="@string/user_num_buy" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/my_shop_car_btn"
                         android:layout_width="0.0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
+                        android:layout_weight="1"
                         android:gravity="center_horizontal"
-                        android:layout_weight="1">
+                        android:orientation="vertical">
+
                         <TextView
                             android:id="@+id/mycenter_num_collection"
                             style="@style/text_black"
                             android:text="0"
-                            android:textStyle="bold"
-                            android:textSize="25sp"/>
+                            android:textSize="25sp"
+                            android:textStyle="bold" />
+
                         <TextView
                             style="@style/text_black"
-                            android:text="@string/user_num_collection"/>
+                            android:text="@string/user_num_collection" />
                     </LinearLayout>
                 </LinearLayout>
 
 
                 <LinearLayout
+                    android:id="@+id/attestation_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:orientation="vertical"
-                    android:id="@+id/attestation_btn">
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:id="@+id/lay_sign"
@@ -280,8 +300,8 @@
                             android:layout_weight="1"
                             android:text=" "
                             android:textColor="@color/user_gray_dft"
-                            android:textSize="13sp"
-                            />
+                            android:textSize="13sp" />
+
                         <TextView
                             android:id="@+id/tv_has_authentication"
                             style="@style/text_black"
@@ -291,8 +311,7 @@
                             android:layout_weight="0.3"
                             android:text="未认证"
                             android:textColor="@color/user_gray_dft"
-                            android:textSize="13sp"
-                             />
+                            android:textSize="13sp" />
 
                         <ImageView
                             android:layout_width="wrap_content"
@@ -317,12 +336,13 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="10dp"
-                                android:textColor="@color/user_black_dft"
-                                android:text="为你推荐"/>
+                                android:text="为你推荐"
+                                android:textColor="@color/user_black_dft" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -336,8 +356,8 @@
                                 android:id="@+id/reg_activity"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:gravity="center_horizontal"
                                 android:layout_weight="0.25"
+                                android:gravity="center_horizontal"
                                 android:orientation="vertical">
 
                                 <ImageView
@@ -377,8 +397,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.25"
                                 android:gravity="center_horizontal"
-                                android:visibility="invisible"
-                                android:orientation="vertical">
+                                android:orientation="vertical"
+                                android:visibility="invisible">
+
                                 <ImageView
                                     android:layout_width="45dp"
                                     android:layout_height="45dp"
@@ -397,8 +418,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.25"
                                 android:gravity="center_horizontal"
-                                android:visibility="invisible"
-                                android:orientation="vertical">
+                                android:orientation="vertical"
+                                android:visibility="invisible">
+
                                 <ImageView
                                     android:layout_width="45dp"
                                     android:layout_height="45dp"

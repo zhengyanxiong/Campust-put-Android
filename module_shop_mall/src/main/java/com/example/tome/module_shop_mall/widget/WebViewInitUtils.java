@@ -47,7 +47,7 @@ public class WebViewInitUtils {
 
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);
 
-
+        settings.setGeolocationEnabled(true);
         //开启Android条用JavaScript
         webview.getSettings().setJavaScriptEnabled(true);
 

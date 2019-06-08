@@ -20,6 +20,33 @@ public class UserAllInfor {
     private int goodsOnCount;
     private int goodsSellCount;
     private int goodsActiveCount;
+    private double userAmount;
+    private double userBuyAmount;
+    private int userCarCount;
+
+    public int getUserCarCount() {
+        return userCarCount;
+    }
+
+    public void setUserCarCount(int userCarCount) {
+        this.userCarCount = userCarCount;
+    }
+
+    public double getUserBuyAmount() {
+        return userBuyAmount;
+    }
+
+    public void setUserBuyAmount(double userBuyAmount) {
+        this.userBuyAmount = userBuyAmount;
+    }
+
+    public double getUserAmount() {
+        return userAmount;
+    }
+
+    public void setUserAmount(double userAmount) {
+        this.userAmount = userAmount;
+    }
 
     public List<CommentList> getCommentList() {
         return commentList;

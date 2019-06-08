@@ -1,8 +1,5 @@
 package com.example.tome.module_shop_mall.activity;
 
-import android.os.Build;
-import android.webkit.PermissionRequest;
-import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -16,14 +13,14 @@ import com.example.tome.module_shop_mall.widget.WebViewInitUtils;
 
 import butterknife.BindView;
 
-public class MyGoodsBuyActivity extends BaseVcActivity {
-    @BindView(R2.id.my_buy_goods_web_view)
+public class MyGoodShopCarlActivity extends BaseVcActivity {
+    @BindView(R2.id.my_goods_shop_car_web_view)
     WebView webView;
 
 
     @Override
     protected int getLayoutId() {
-        return R.layout.mall_activity_my_buy_goods;
+        return R.layout.mall_activity_my_goods_shop_car;
     }
 
     @Override
@@ -39,17 +36,9 @@ public class MyGoodsBuyActivity extends BaseVcActivity {
 
 
         WebViewInitUtils.init(this, webView,null);
-        webView.getSettings().setDomStorageEnabled(true);
-        webView.getSettings().setAppCacheMaxSize(1024 * 1024 * 8);
-        String appCachePath = getCacheDir().getAbsolutePath();
-        webView.getSettings().setAppCachePath(appCachePath);
-        webView.getSettings().setAllowFileAccess(true);
-        webView.getSettings().setAppCacheEnabled(true);
-        webView.getSettings().setDatabaseEnabled(true);
-
         
 
-        webView.loadUrl(Constants.MY_BUY_GOODS_LINK);
+        webView.loadUrl(Constants.MY_GOODS_CAR_LINK);
         //点击拦截 true表示拦截, false表示不拦截
         webView.setWebViewClient(new WebViewClient() {
             @Override

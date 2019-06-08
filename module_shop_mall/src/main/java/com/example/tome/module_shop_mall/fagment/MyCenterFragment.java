@@ -31,6 +31,7 @@ import com.example.tome.module_shop_mall.R;
 import com.example.tome.module_shop_mall.R2;
 import com.example.tome.module_shop_mall.activity.LoginActivity;
 import com.example.tome.module_shop_mall.activity.MainActivity;
+import com.example.tome.module_shop_mall.activity.MyGoodShopCarlActivity;
 import com.example.tome.module_shop_mall.activity.MyGoodsBuyActivity;
 import com.example.tome.module_shop_mall.activity.MyGoodsPublshActivity;
 import com.example.tome.module_shop_mall.activity.MyGoodsSellActivity;
@@ -40,6 +41,7 @@ import com.example.tome.module_shop_mall.activity.StudentAuthenticationActivity;
 import com.example.tome.module_shop_mall.activity.UserHomeActivity;
 import com.example.tome.module_shop_mall.arouter.RouterCenter;
 import com.example.tome.module_shop_mall.bean.NoticeMessage;
+import com.example.tome.module_shop_mall.bean.PayNoticeMessage;
 import com.example.tome.module_shop_mall.bean.ProjectClassifyBean;
 import com.example.tome.module_shop_mall.bean.UserAllInfor;
 import com.example.tome.module_shop_mall.bean.UserInfor;
@@ -51,14 +53,20 @@ import com.example.tome.module_shop_mall.mqtt.MqttPushClient;
 import com.example.tome.module_shop_mall.mqtt.MyServiceConnection;
 import com.example.tome.module_shop_mall.mqtt.PushCallback;
 import com.example.tome.module_shop_mall.presenter.MyCenterPresenter;
+import com.example.tome.module_shop_mall.util.DateUtiles;
 import com.example.tome.module_shop_mall.widget.JavaScriptUtils;
 import com.fec.core.router.arouter.RouterURLS;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.luck.picture.lib.tools.DateUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -100,6 +108,8 @@ public class MyCenterFragment extends BaseVpFragment<MyCenterContract.View, MyCe
     TextView myBuyCar;
     @BindView(R2.id.tv_has_authentication)
     TextView authenticationText;
+    @BindView(R2.id.tv_signature)
+    TextView userSignature;
     @BindView(R2.id.lay_sign)
     LinearLayout authenticationBtn;
     @BindView(R2.id.my_publish_goods_btn)
@@ -112,6 +122,8 @@ public class MyCenterFragment extends BaseVpFragment<MyCenterContract.View, MyCe
     LinearLayout user_feedback;
     @BindView(R2.id.campus_ruler)
     LinearLayout campus_ruler;
+    @BindView(R2.id.my_shop_car_btn)
+    LinearLayout myShopCarBtn;
     private static String userToken = "";
 
     private PushCallback pushCallback;
@@ -163,6 +175,14 @@ public class MyCenterFragment extends BaseVpFragment<MyCenterContract.View, MyCe
             public void onClick(View view) {
                 if(!userToken.isEmpty()){
                     startActivity(new Intent((AppCompatActivity) getActivity(), MyGoodsBuyActivity.class));
+                }
+            }
+        });
+        myShopCarBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!userToken.isEmpty()){
+                    startActivity(new Intent((AppCompatActivity) getActivity(), MyGoodShopCarlActivity.class));
                 }
             }
         });
@@ -280,8 +300,17 @@ public class MyCenterFragment extends BaseVpFragment<MyCenterContract.View, MyCe
         myPublish.setText(jsonObject.getPublishClassCount()+"");
         mySellNum.setText(jsonObject.getUserSellCount()+"");
         myBuyNum.setText(jsonObject.getUserBuyCount()+"");
-
+        myBuyCar.setText(jsonObject.getUserCarCount()+"");
+        //获得用户注册时间
+        //Date createdDate = DateUtiles.stringToDate(jsonObject.getUserInfo().getRegisterDate(),"yyyy-MM-dd'T'HH:mm:ss.SSS");
+        Date createdDate = jsonObject.getUserInfo().getRegisterDate();
+        long f = DateUtiles.getDaySub(DateUtiles.DateToString(createdDate,"yyyy-MM-dd HH:mm:ss"),DateUtiles.DateToString(new Date(),"yyyy-MM-dd HH:mm:ss"));
+        //String signature = getContext().getResources().getString(R.string.user_signature);
+        String signature = "加入校园拍拍"+f+"天，共赚"+jsonObject.getUserBuyAmount()+"元。";
+        //String.format(signature, f,jsonObject.getUserBuyAmount());
+        userSignature.setText(signature);
     }
+
 
     /**
      * 初始化Mqtt连接
@@ -309,6 +338,17 @@ public class MyCenterFragment extends BaseVpFragment<MyCenterContract.View, MyCe
         L.d("Mqtt接收到的消息内容："+message);
         Gson gson = new Gson();
         NoticeMessage noticeMessage = gson.fromJson(message,NoticeMessage.class);
+        PayNoticeMessage payNoticeMessage = gson.fromJson(noticeMessage.getTxno(),PayNoticeMessage.class);
+
+        if ("3".equals(noticeMessage.getType())){ //支付通知
+            Intent intent = new Intent(getContext(),MainActivity.class);
+            intent.putExtra("homeWeb",1);
+            intent.putExtra("isPaySuccess",payNoticeMessage.getState()+"");
+            intent.putExtra("outTradeNo",payNoticeMessage.getOutTradeNo());
+            intent.putExtra("tradeNo",payNoticeMessage.getTradeNo());
+            intent.putExtra("totalAmount",payNoticeMessage.getTotalAmount());
+            getContext().startActivity(intent);
+        }
 
         new JavaScriptUtils(getActivity()).sendNotification1(noticeMessage.getTitle(),
                 noticeMessage.getContent(),"",noticeMessage.getActiveCreatTime(),

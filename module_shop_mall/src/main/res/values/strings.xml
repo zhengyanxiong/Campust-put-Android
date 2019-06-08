@@ -39,6 +39,7 @@
     <string name="user_app_name">TranslucentScrollView</string>
     <string name="user_auther">Bernie</string>
     <string name="user_email">742228386@qq.com</string>
+    <string name="user_signature">加入校园拍拍%1$d天，共赚%2$.2f元。</string>
     <string name="user_num_publish">我发布的</string>
     <string name="user_num_sell">卖出管理</string>
     <string name="user_num_buy">买到管理</string>

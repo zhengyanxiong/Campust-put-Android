@@ -53,7 +53,6 @@ public class JavaScriptUtils{
     public void showImageDialog(String flag) {
         if(BasicTool.isNotEmpty(flag)){
             JavaScriptUtils.flag = flag;
-            
         }
         new ActionSheetDialog(activity)
                 .builder()

@@ -18,7 +18,7 @@ public interface Constants {
     String HOME_PAGE_LINK = BaseHost.CAMPUS_SERVER_HOST+":8000";
 
     //h5消息地址
-    String IM_PAGE_LINK = "http://192.168.1.4:9999";   //TODO H5消息页面地址
+    String IM_PAGE_LINK = "http://192.168.43.181:9999";   //TODO H5消息页面地址
 
     //h5发布商品地址
     String PUBLISH_GOODS_LINK = BaseHost.CAMPUS_SERVER_HOST+":8000/good/publishGoodsToAdr";
@@ -27,6 +27,8 @@ public interface Constants {
     String MY_PUBLISH_GOODS_LINK = BaseHost.CAMPUS_SERVER_HOST+":8000/good/myPublishGoods";
     //h5我卖出的商品详情
     String MY_SELL_GOODS_LINK = BaseHost.CAMPUS_SERVER_HOST+":8000/user/sellManage";
+    //h5购物车
+    String MY_GOODS_CAR_LINK = BaseHost.CAMPUS_SERVER_HOST+":8000/selectCart";
     //h5我买到的商品详情
     String MY_BUY_GOODS_LINK = BaseHost.CAMPUS_SERVER_HOST+":8000/user/buyManage";
 
@@ -56,4 +58,7 @@ public interface Constants {
     String USER_RULERS_LINK = BaseHost.CAMPUS_SERVER_HOST+":8000/rulesUser";
     //关于校园拍拍地址
     String ABOUT_LINK = BaseHost.CAMPUS_SERVER_HOST+":8000/about";
+
+    //支付成功界面
+    String PAY_SECCESS_LINK = BaseHost.CAMPUS_SERVER_HOST+":8000/callBack/paySuccessPage";
 }

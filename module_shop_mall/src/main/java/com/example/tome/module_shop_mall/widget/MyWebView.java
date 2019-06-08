@@ -43,6 +43,7 @@ public class MyWebView extends WebView{
             super.onProgressChanged(view, newProgress);
         }
 
+
     }
 
     @Override
